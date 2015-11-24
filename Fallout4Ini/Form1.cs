@@ -16,6 +16,7 @@ namespace Fallout4Ini
     {
         private string metaDataFile = @"C:\Users\" + Environment.UserName + @"\Documents\Fallout4IniEditor.ini";
         private Manager manager;
+        private bool running;
 
         public EditorForm()
         {
@@ -23,6 +24,20 @@ namespace Fallout4Ini
             manager = new Manager(this);
             InitializeComponent();
             Init();
+            Update();
+        }
+
+        // Used an async method to update and check on the ini files instead of a thread, because a thread
+        // does not allow me to manipulate the GUI, so an async method will do the trick
+        public async void Update()
+        {
+            running = true;
+            while (running)
+            {
+                // Check the ini files and change the GUI two times a second!
+                await Task.Delay(1000);
+                manager.Update();
+            }
         }
  
         // Method that initializes things that the program needs
@@ -124,6 +139,9 @@ namespace Fallout4Ini
                                      "[Fallout4Prefs Directory]: " + prefsIniDir.Text + "\n"};
             ClearFile(metaDataFile);
             AppendFile(linesToWrite, metaDataFile);
+
+            // Stopping the multi tasking of the async method
+            running = false;
         }
 
         // Method that will read all of the lines of a file, and returns the result
@@ -221,5 +239,6 @@ namespace Fallout4Ini
         {
             manager.CheckUnlockFPS();
         }
+
     }
 }

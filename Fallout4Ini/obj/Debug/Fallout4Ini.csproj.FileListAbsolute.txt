@@ -10,3 +10,9 @@ C:\Users\Brady\documents\visual studio 2013\Projects\Fallout4Ini\Fallout4Ini\obj
 C:\Users\Brady\Documents\Visual Studio 2013\Projects\Fallout4Ini\Fallout4-Ini-Editor\Fallout4Ini\bin\Debug\Fallout4Ini.exe.config
 C:\Users\Brady\Documents\Visual Studio 2013\Projects\Fallout4Ini\Fallout4-Ini-Editor\Fallout4Ini\obj\Debug\Fallout4Ini.exe
 C:\Users\Brady\Documents\Visual Studio 2013\Projects\Fallout4Ini\Fallout4-Ini-Editor\Fallout4Ini\obj\Debug\Fallout4Ini.pdb
+C:\Users\Brady\Documents\Visual Studio 2013\Projects\Fallout4Ini\Fallout4-Ini-Editor\Fallout4Ini\bin\Debug\Fallout4Ini.exe
+C:\Users\Brady\Documents\Visual Studio 2013\Projects\Fallout4Ini\Fallout4-Ini-Editor\Fallout4Ini\bin\Debug\Fallout4Ini.pdb
+C:\Users\Brady\Documents\Visual Studio 2013\Projects\Fallout4Ini\Fallout4-Ini-Editor\Fallout4Ini\obj\Debug\Fallout4Ini.csprojResolveAssemblyReference.cache
+C:\Users\Brady\Documents\Visual Studio 2013\Projects\Fallout4Ini\Fallout4-Ini-Editor\Fallout4Ini\obj\Debug\Fallout4Ini.EditorForm.resources
+C:\Users\Brady\Documents\Visual Studio 2013\Projects\Fallout4Ini\Fallout4-Ini-Editor\Fallout4Ini\obj\Debug\Fallout4Ini.Properties.Resources.resources
+C:\Users\Brady\Documents\Visual Studio 2013\Projects\Fallout4Ini\Fallout4-Ini-Editor\Fallout4Ini\obj\Debug\Fallout4Ini.csproj.GenerateResource.Cache

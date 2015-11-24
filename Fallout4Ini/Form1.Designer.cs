@@ -230,8 +230,10 @@
             this.Controls.Add(this.prefsIniButton);
             this.Controls.Add(this.inibutton);
             this.Controls.Add(this.banner);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "EditorForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Fallout 4 Ini Editor";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EditorForm_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
