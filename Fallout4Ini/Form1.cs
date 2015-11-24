@@ -34,9 +34,9 @@ namespace Fallout4Ini
             running = true;
             while (running)
             {
-                // Check the ini files and change the GUI two times a second!
-                await Task.Delay(1000);
+                // Check the ini files and change the GUI once a second
                 manager.Update();
+                await Task.Delay(1000);
             }
         }
  
@@ -165,7 +165,7 @@ namespace Fallout4Ini
         }
 
         // Method that overwrites a file with new contents
-        private void OverwriteFile(string[] lines, string path)
+        public void OverwriteFile(string[] lines, string path)
         {
             using (FileStream stream = new FileStream(path, FileMode.Truncate, FileAccess.Write))
             {
@@ -180,7 +180,7 @@ namespace Fallout4Ini
         }
 
         // Method that appends to a file
-        private void AppendFile(string[] lines, string path)
+        public void AppendFile(string[] lines, string path)
         {
             using (FileStream stream = new FileStream(path, FileMode.Append, FileAccess.Write))
             {
@@ -237,7 +237,7 @@ namespace Fallout4Ini
         // Method that executes if the user clicks the Unlock the FPS checkbox
         private void unlockFPSBox_CheckedChanged(object sender, EventArgs e)
         {
-            manager.CheckUnlockFPS();
+            manager.SetUnlockFPS();
         }
 
     }
