@@ -38,6 +38,13 @@
             this.donationButton = new System.Windows.Forms.Button();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.thirdFOVLabel = new System.Windows.Forms.Label();
+            this.firstFOVLabel = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.depthLabel = new System.Windows.Forms.Label();
+            this.depthBox = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.unlockFPSLabel = new System.Windows.Forms.Label();
             this.unlockFPSBox = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -46,13 +53,14 @@
             this.settingLabel = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.aboutButton = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.depthBox = new System.Windows.Forms.ComboBox();
-            this.depthLabel = new System.Windows.Forms.Label();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.banner)).BeginInit();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.SuspendLayout();
             // 
             // fileSystemWatcher1
@@ -128,6 +136,12 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.numericUpDown2);
+            this.tabPage1.Controls.Add(this.numericUpDown1);
+            this.tabPage1.Controls.Add(this.thirdFOVLabel);
+            this.tabPage1.Controls.Add(this.firstFOVLabel);
+            this.tabPage1.Controls.Add(this.label4);
+            this.tabPage1.Controls.Add(this.label3);
             this.tabPage1.Controls.Add(this.depthLabel);
             this.tabPage1.Controls.Add(this.depthBox);
             this.tabPage1.Controls.Add(this.label2);
@@ -144,6 +158,72 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "General";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // thirdFOVLabel
+            // 
+            this.thirdFOVLabel.AutoSize = true;
+            this.thirdFOVLabel.Location = new System.Drawing.Point(340, 108);
+            this.thirdFOVLabel.Name = "thirdFOVLabel";
+            this.thirdFOVLabel.Size = new System.Drawing.Size(266, 13);
+            this.thirdFOVLabel.TabIndex = 12;
+            this.thirdFOVLabel.Text = "Set the field of view of the camera in third person mode";
+            // 
+            // firstFOVLabel
+            // 
+            this.firstFOVLabel.AutoSize = true;
+            this.firstFOVLabel.Location = new System.Drawing.Point(340, 83);
+            this.firstFOVLabel.Name = "firstFOVLabel";
+            this.firstFOVLabel.Size = new System.Drawing.Size(262, 13);
+            this.firstFOVLabel.TabIndex = 11;
+            this.firstFOVLabel.Text = "Set the field of view of the camera in first person mode";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(18, 108);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(91, 13);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "Third Person FOV";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(18, 83);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(86, 13);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "First Person FOV";
+            // 
+            // depthLabel
+            // 
+            this.depthLabel.AutoSize = true;
+            this.depthLabel.Location = new System.Drawing.Point(340, 58);
+            this.depthLabel.Name = "depthLabel";
+            this.depthLabel.Size = new System.Drawing.Size(152, 13);
+            this.depthLabel.TabIndex = 8;
+            this.depthLabel.Text = "Enable or disable depth of field";
+            // 
+            // depthBox
+            // 
+            this.depthBox.FormattingEnabled = true;
+            this.depthBox.Items.AddRange(new object[] {
+            "Disabled",
+            "Enabled"});
+            this.depthBox.Location = new System.Drawing.Point(179, 53);
+            this.depthBox.Name = "depthBox";
+            this.depthBox.Size = new System.Drawing.Size(121, 21);
+            this.depthBox.TabIndex = 7;
+            this.depthBox.SelectedIndexChanged += new System.EventHandler(this.depthBox_SelectedIndexChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(18, 58);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(73, 13);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "Depth of Field";
             // 
             // unlockFPSLabel
             // 
@@ -210,7 +290,7 @@
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(764, 397);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Temp";
+            this.tabPage2.Text = "Misc";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // aboutButton
@@ -223,35 +303,29 @@
             this.aboutButton.UseVisualStyleBackColor = true;
             this.aboutButton.Click += new System.EventHandler(this.aboutButton_Click);
             // 
-            // label2
+            // numericUpDown1
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(18, 58);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(73, 13);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "Depth of Field";
+            this.numericUpDown1.Location = new System.Drawing.Point(179, 80);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(121, 20);
+            this.numericUpDown1.TabIndex = 13;
+            this.numericUpDown1.Value = new decimal(new int[] {
+            80,
+            0,
+            0,
+            0});
             // 
-            // depthBox
+            // numericUpDown2
             // 
-            this.depthBox.FormattingEnabled = true;
-            this.depthBox.Items.AddRange(new object[] {
-            "Disabled",
-            "Enabled"});
-            this.depthBox.Location = new System.Drawing.Point(179, 53);
-            this.depthBox.Name = "depthBox";
-            this.depthBox.Size = new System.Drawing.Size(121, 21);
-            this.depthBox.TabIndex = 7;
-            this.depthBox.SelectedIndexChanged += new System.EventHandler(this.depthBox_SelectedIndexChanged);
-            // 
-            // depthLabel
-            // 
-            this.depthLabel.AutoSize = true;
-            this.depthLabel.Location = new System.Drawing.Point(343, 58);
-            this.depthLabel.Name = "depthLabel";
-            this.depthLabel.Size = new System.Drawing.Size(152, 13);
-            this.depthLabel.TabIndex = 8;
-            this.depthLabel.Text = "Enable or disable depth of field";
+            this.numericUpDown2.Location = new System.Drawing.Point(179, 106);
+            this.numericUpDown2.Name = "numericUpDown2";
+            this.numericUpDown2.Size = new System.Drawing.Size(121, 20);
+            this.numericUpDown2.TabIndex = 14;
+            this.numericUpDown2.Value = new decimal(new int[] {
+            80,
+            0,
+            0,
+            0});
             // 
             // EditorForm
             // 
@@ -277,6 +351,8 @@
             this.tabControl.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -304,6 +380,12 @@
         private System.Windows.Forms.ComboBox depthBox;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label depthLabel;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label firstFOVLabel;
+        private System.Windows.Forms.Label thirdFOVLabel;
+        private System.Windows.Forms.NumericUpDown numericUpDown2;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
 
         // Accessors
         public System.Windows.Forms.TextBox PrefsIniDir

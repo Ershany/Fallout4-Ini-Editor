@@ -77,7 +77,7 @@ namespace Fallout4Ini
         private void defaultIniButton_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Title = "Select the Fallout4.ini file";
+            ofd.Title = "Select the Fallout4.ini file located in Documents/My Games/Fallout4";
 
             // Check to see if there is any previous directories, and if there is, start the initial directory at that position
             if (iniDir.Text != "")
@@ -106,7 +106,7 @@ namespace Fallout4Ini
         private void prefsIniButton_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Title = "Select the Fallout4Prefs.ini file";
+            ofd.Title = "Select the Fallout4Prefs.ini file in Documents/My Games/Fallout4";
 
             // Check to see if there is any previous directories, and if there is, start the initial directory at that position
             if (prefsIniDir.Text != "")
