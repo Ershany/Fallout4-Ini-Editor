@@ -147,7 +147,14 @@ namespace Fallout4Ini
         // Method that will read all of the lines of a file, and returns the result
         public string[] GetFileLines(string path)
         {
-            return File.ReadAllLines(path);
+            try
+            {
+                return File.ReadAllLines(path);
+            }
+            catch (UnauthorizedAccessException e)
+            {
+                throw;
+            }
         }
 
         // Method that will look through a line to see if it contains an item (if it finds it it will return what line index it found it at)
@@ -167,38 +174,81 @@ namespace Fallout4Ini
         // Method that overwrites a file with new contents
         public void OverwriteFile(string[] lines, string path)
         {
-            using (FileStream stream = new FileStream(path, FileMode.Truncate, FileAccess.Write))
+            try
             {
-                foreach (var line in lines) 
+                using (FileStream stream = new FileStream(path, FileMode.Truncate, FileAccess.Write))
                 {
-                    byte[] bytes = GetBytes(line);
-                    stream.Write(bytes, 0, bytes.Length);
-                }
+                    foreach (var line in lines)
+                    {
+                        byte[] bytes = GetBytes(line);
+                        stream.Write(bytes, 0, bytes.Length);
+                    }
 
-                stream.Flush();
+                    stream.Flush();
+                }
+            }
+            catch (UnauthorizedAccessException e)
+            {
+                throw;
+            }
+        }
+
+        // Method that overwrites a file but adds \n characters at the end of every line
+        public void OverwriteLineFile(string[] lines, string path)
+        {
+            try
+            {
+                using (FileStream stream = new FileStream(path, FileMode.Truncate, FileAccess.Write))
+                {
+                    foreach (var line in lines)
+                    {
+                        byte[] bytes = GetBytes(line + "\r\n");
+                        stream.Write(bytes, 0, bytes.Length);
+                    }
+
+                    stream.Flush();
+                }
+            }
+            catch (UnauthorizedAccessException e)
+            {
+                throw;
             }
         }
 
         // Method that appends to a file
         public void AppendFile(string[] lines, string path)
         {
-            using (FileStream stream = new FileStream(path, FileMode.Append, FileAccess.Write))
+            try
             {
-                using (StreamWriter sw = new StreamWriter(stream))
+                using (FileStream stream = new FileStream(path, FileMode.Append, FileAccess.Write))
                 {
-                    foreach (var line in lines)
+                    using (StreamWriter sw = new StreamWriter(stream))
                     {
-                        sw.WriteLine(line);
+                        foreach (var line in lines)
+                        {
+                            sw.WriteLine(line);
+                        }
+                        sw.Flush();
                     }
-                    sw.Flush();
                 }
+            }
+            catch (UnauthorizedAccessException e)
+            {
+                throw;
             }
         }
 
         // Method to clear a file
-        private void ClearFile(string path)
+        public void ClearFile(string path)
         {
-            File.Create(path).Close();
+            try
+            {
+                File.Create(path).Close();
+            }
+            catch (UnauthorizedAccessException e)
+            {
+                throw;
+            }
         }
 
         // Method to convert a string to a byte array
@@ -231,13 +281,18 @@ namespace Fallout4Ini
                             "This program uses a metadata file located in your documents so please do not delete it\n" + 
                             "All updates will be free regardless of donations\n" +
                             "Developed using C# and Visual Studio\n" + 
-                            "Please report any bugs to this email: Bradyjessup@hotmail.com");
+                            "Please report any bugs to this email: Bradyjessup@hotmail.com", "About the Fallout4 Ini Editor");
         }
 
         // Method that executes if the user clicks the Unlock the FPS checkbox
         private void unlockFPSBox_CheckedChanged(object sender, EventArgs e)
         {
             manager.SetUnlockFPS();
+        }
+
+        private void depthBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            manager.SetDepthOfField();
         }
 
     }

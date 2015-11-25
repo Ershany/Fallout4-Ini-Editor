@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Fallout4Ini
 {
@@ -35,7 +36,7 @@ namespace Fallout4Ini
             if (form.PrefsIniDir.Text != "")
             {
                 fallout4PrefsLines = form.GetFileLines(form.PrefsIniDir.Text);
-
+                
                 // Now do stuff with these lines
                 CheckUnlockFPS(fallout4PrefsLines);
             }
@@ -81,24 +82,43 @@ namespace Fallout4Ini
         // Function that will execute when the user clicks the Unlock the FPS checkbox
         public void SetUnlockFPS()
         {
-            // This value is what will be changed on the "iPresentInterval=value" line
-            int value = form.UnlockFPSBox.Checked ? 0 : 1;
-
-            string[] fileLines = form.GetFileLines(form.PrefsIniDir.Text);
-            int index = form.IsFound(fileLines, "iPresentInterval=");
-            if (index != -1)
+            try
             {
-                fileLines[index] = "iPresentInterval=" + value;
-            }
+                // This value is what will be changed on the "iPresentInterval=value" line
+                int value = form.UnlockFPSBox.Checked ? 0 : 1;
+            
+                string[] fileLines = form.GetFileLines(form.PrefsIniDir.Text);
+            
+                int index = form.IsFound(fileLines, "iPresentInterval=");
+                if (index != -1)
+                {
+                    fileLines[index] = "iPresentInterval=" + value;
+                }
 
-            // Add new lines onto the end of the lines
-            for (int i = 0; i < fileLines.Length; i++)
+                // Now overwrite the old file with the line using the OverwriteLineFile
+                form.ClearFile(form.PrefsIniDir.Text);
+                form.AppendFile(fileLines, form.PrefsIniDir.Text);
+            }
+            catch (UnauthorizedAccessException e)
             {
-                fileLines[i] += "\r\n";
+                MessageBox.Show("Please ensure that the ini files are not readonly", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
             }
+        }
 
-            // Now overwrite the old file with the new lines
-            form.OverwriteFile(fileLines, form.PrefsIniDir.Text);
+        // Function that will execute when the user clicks the Depth of Field ComboBox
+        public void SetDepthOfField()
+        {
+            try
+            {
+                //This value is what will be changed on the bDoDepthOfField=value and bScreenSpaceBokeh=value line
+                //int value = form.DepthBox.
+            }
+            catch (UnauthorizedAccessException e)
+            {
+                MessageBox.Show("Please ensure that the ini files are not readonly", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
     }
 }

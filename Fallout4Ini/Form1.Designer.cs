@@ -46,6 +46,9 @@
             this.settingLabel = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.aboutButton = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.depthBox = new System.Windows.Forms.ComboBox();
+            this.depthLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.banner)).BeginInit();
             this.tabControl.SuspendLayout();
@@ -125,6 +128,9 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.depthLabel);
+            this.tabPage1.Controls.Add(this.depthBox);
+            this.tabPage1.Controls.Add(this.label2);
             this.tabPage1.Controls.Add(this.unlockFPSLabel);
             this.tabPage1.Controls.Add(this.unlockFPSBox);
             this.tabPage1.Controls.Add(this.label1);
@@ -144,9 +150,9 @@
             this.unlockFPSLabel.AutoSize = true;
             this.unlockFPSLabel.Location = new System.Drawing.Point(340, 33);
             this.unlockFPSLabel.Name = "unlockFPSLabel";
-            this.unlockFPSLabel.Size = new System.Drawing.Size(225, 13);
+            this.unlockFPSLabel.Size = new System.Drawing.Size(225, 26);
             this.unlockFPSLabel.TabIndex = 5;
-            this.unlockFPSLabel.Text = "Check this to unlock the framerate per second";
+            this.unlockFPSLabel.Text = "Check this to unlock the framerate per second\r\n\r\n";
             // 
             // unlockFPSBox
             // 
@@ -217,6 +223,36 @@
             this.aboutButton.UseVisualStyleBackColor = true;
             this.aboutButton.Click += new System.EventHandler(this.aboutButton_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(18, 58);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(73, 13);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "Depth of Field";
+            // 
+            // depthBox
+            // 
+            this.depthBox.FormattingEnabled = true;
+            this.depthBox.Items.AddRange(new object[] {
+            "Disabled",
+            "Enabled"});
+            this.depthBox.Location = new System.Drawing.Point(179, 53);
+            this.depthBox.Name = "depthBox";
+            this.depthBox.Size = new System.Drawing.Size(121, 21);
+            this.depthBox.TabIndex = 7;
+            this.depthBox.SelectedIndexChanged += new System.EventHandler(this.depthBox_SelectedIndexChanged);
+            // 
+            // depthLabel
+            // 
+            this.depthLabel.AutoSize = true;
+            this.depthLabel.Location = new System.Drawing.Point(343, 58);
+            this.depthLabel.Name = "depthLabel";
+            this.depthLabel.Size = new System.Drawing.Size(152, 13);
+            this.depthLabel.TabIndex = 8;
+            this.depthLabel.Text = "Enable or disable depth of field";
+            // 
             // EditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -265,6 +301,9 @@
         private System.Windows.Forms.CheckBox unlockFPSBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button aboutButton;
+        private System.Windows.Forms.ComboBox depthBox;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label depthLabel;
 
         // Accessors
         public System.Windows.Forms.TextBox PrefsIniDir
@@ -286,6 +325,11 @@
         {
             get { return unlockFPSBox; }
             private set { unlockFPSBox = value; }
+        }
+        public System.Windows.Forms.ComboBox DepthBox
+        {
+            get { return depthBox; }
+            set { depthBox = value; }
         }
 
     }
