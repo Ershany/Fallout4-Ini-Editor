@@ -39,6 +39,7 @@ namespace Fallout4Ini
                 
                 // Now do stuff with these lines
                 CheckUnlockFPS(fallout4PrefsLines);
+                CheckDepthOfField(fallout4PrefsLines);
             }
 
             // Check on things that need both of them, we no longer need to get the file contents because if this
@@ -60,6 +61,19 @@ namespace Fallout4Ini
             else if (form.IsFound(fallout4PrefsLines, "iPresentInterval=1") != -1)
             {
                 form.UnlockFPSBox.Checked = false;
+            }
+        }
+
+        // Function called by Update, which will set the depth of field accordingly
+        private void CheckDepthOfField(string[] fallout4PrefLines)
+        {
+            if (form.IsFound(fallout4PrefLines, "bDoDepthOfField=1") != -1 && form.IsFound(fallout4PrefLines, "bScreenSpaceBokeh=1") != -1)
+            {
+                form.DepthBox.SelectedIndex = 1;
+            }
+            else if (form.IsFound(fallout4PrefLines, "bDoDepthOfField=0") != -1 && form.IsFound(fallout4PrefLines, "bScreenSpaceBokeh=0") != -1)
+            {
+                form.DepthBox.SelectedIndex = 0;
             }
         }
         
@@ -95,7 +109,7 @@ namespace Fallout4Ini
                     fileLines[index] = "iPresentInterval=" + value;
                 }
 
-                // Now overwrite the old file with the line using the OverwriteLineFile
+                // Now overwrite the old file with the line using append to file 
                 form.ClearFile(form.PrefsIniDir.Text);
                 form.AppendFile(fileLines, form.PrefsIniDir.Text);
             }
@@ -112,7 +126,29 @@ namespace Fallout4Ini
             try
             {
                 //This value is what will be changed on the bDoDepthOfField=value and bScreenSpaceBokeh=value line
-                //int value = form.DepthBox.
+                int value = -1;
+                if (form.DepthBox.Text == "Disabled")
+                {
+                    value = 0;
+                }
+                else if (form.DepthBox.Text == "Enabled")
+                {
+                    value = 1;
+                }
+
+                string[] fileLines = form.GetFileLines(form.PrefsIniDir.Text);
+
+                int index1 = form.IsFound(fileLines, "bDoDepthOfField=");
+                int index2 = form.IsFound(fileLines, "bScreenSpaceBokeh=");
+                if (index1 != -1 && index2 != -1)
+                {
+                    fileLines[index1] = "bDoDepthOfField=" + value;
+                    fileLines[index2] = "bScreenSpaceBokeh=" + value;
+                }
+
+                // Now overwrite the old file with the line using append to file
+                form.ClearFile(form.PrefsIniDir.Text);
+                form.AppendFile(fileLines, form.PrefsIniDir.Text);
             }
             catch (UnauthorizedAccessException e)
             {
