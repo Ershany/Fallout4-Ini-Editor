@@ -24,6 +24,7 @@ namespace Fallout4Ini
             manager = new Manager(this);
             InitializeComponent();
             Init();
+            InitIni();
             Update();
         }
 
@@ -70,7 +71,89 @@ namespace Fallout4Ini
                 }
             }
             // Now check to see if the directories were added to the labels, and if so then allow the user to manipulate the ini files
-            manager.CheckTabControl();
+            manager.SetTabControl();
+
+            // Show the user a message before the program starts (if they have not entered ini files, meaning it is there first time using the software)
+            if (!TabControl.Enabled)
+            {
+                MessageBox.Show("IMPORTANT NOTICE\n" +
+                            "If this is your first time using the software please ensure you have not moved the ini lines around to different headers, like moving a line from [Display] to [Imagespace]\n" +
+                            "If you did please delete your ini files and launch Fallout4 so they are rebuilt\n" +
+                            "Also make sure to use your ini files in Documents\\My Games\\Fallout4, not the ini files from SteamApps\\Common\\Fallout4\n" +
+                            "Please do not delete the file in Documents called \"Fallout4IniEditor\"");
+            }
+        }
+
+        // Method that makes sure the ini files have the correct lines to modify (e.g. FOV)
+        private void InitIni()
+        {
+            // Make sure the user has provided ini files
+            if (!TabControl.Enabled) return;
+
+            // Get the file lines
+            string[] prefsIniLines = GetFileLines(PrefsIniDir.Text);
+            string[] iniLines = GetFileLines(IniDir.Text);
+
+            // Ensure the UnlockFPS line is there
+            if (IsFound(prefsIniLines, "iPresentInterval=") == -1)
+            {
+                int index = IsFound(prefsIniLines, "[Display]");
+                prefsIniLines = GetNewArray(prefsIniLines, new string[]{"iPresentInterval=1"}, index + 1);
+                ClearFile(PrefsIniDir.Text);
+                AppendFile(prefsIniLines, PrefsIniDir.Text);
+            }
+
+            // Ensure that the Depth of Field lines are there
+            if (IsFound(prefsIniLines, "bDoDepthOfField=") == -1)
+            {
+                int index = IsFound(prefsIniLines, "[Imagespace]");
+                prefsIniLines = GetNewArray(prefsIniLines, new string[] {"bDoDepthOfField=1"}, index + 1);
+                ClearFile(PrefsIniDir.Text);
+                AppendFile(prefsIniLines, PrefsIniDir.Text);
+            }
+            if(IsFound(prefsIniLines, "bScreenSpaceBokeh=") == -1) 
+            {
+                int index = IsFound(prefsIniLines, "[Imagespace]");
+                prefsIniLines = GetNewArray(prefsIniLines, new string[] {"bScreenSpaceBokeh=1"}, index + 1);
+                ClearFile(PrefsIniDir.Text);
+                AppendFile(prefsIniLines, PrefsIniDir.Text);
+            }
+
+            // Ensure the FOV lines are there
+            // The default ini files have it under the wrong header so check for the lines under the [Display] header only (Check between an interval)
+            // Now search if the FOV lines are inbetween the interval
+            int startSearchIndex = IsFound(iniLines, "[Display]");
+            int endSearchIndex = IsFound(iniLines, "[HairLighting]");
+            int temp1 = IsFound(iniLines, "fDefaultWorldFOV=");
+            int temp2 = IsFound(iniLines, "fDefault1stPersonFOV=");
+            if (temp1 == -1 || temp1 < startSearchIndex || temp1 > endSearchIndex)
+            {
+                // Since the line is not under display, add it
+                iniLines = GetNewArray(iniLines, new string[] {"fDefaultWorldFOV=90"}, startSearchIndex + 1);
+                ClearFile(IniDir.Text);
+                AppendFile(iniLines, IniDir.Text);
+            }
+            if (temp2 == -1 || temp2 < startSearchIndex || temp2 > endSearchIndex)
+            {
+                // Since the line is not under display, add it
+                iniLines = GetNewArray(iniLines, new string[] {"fDefault1stPersonFOV=90"}, startSearchIndex + 1);
+                ClearFile(IniDir.Text);
+                AppendFile(iniLines, IniDir.Text);
+            }
+            if (IsFound(prefsIniLines, "fDefaultWorldFOV=") == -1)
+            {
+                int index = IsFound(prefsIniLines, "[Display]");
+                prefsIniLines = GetNewArray(prefsIniLines, new string[] {"fDefaultWorldFOV=90"}, index + 1);
+                ClearFile(PrefsIniDir.Text);
+                AppendFile(prefsIniLines, PrefsIniDir.Text);
+            }
+            if (IsFound(prefsIniLines, "fDefault1stPersonFOV=") == -1)
+            {
+                int index = IsFound(prefsIniLines, "[Display]");
+                prefsIniLines = GetNewArray(prefsIniLines, new string[] {"fDefault1stPersonFOV=90"}, index + 1);
+                ClearFile(PrefsIniDir.Text);
+                AppendFile(prefsIniLines, PrefsIniDir.Text);
+            }
         }
 
         // Directory picking code
@@ -98,7 +181,8 @@ namespace Fallout4Ini
             {
                 iniDir.Text = ofd.FileName;
                 // Now that a directory has changed or has been added, see if we should enable/disable the tab control
-                manager.CheckTabControl();
+                manager.SetTabControl();
+                InitIni();
             }
         }
 
@@ -127,7 +211,8 @@ namespace Fallout4Ini
             {
                 prefsIniDir.Text = ofd.FileName;
                 // Now that a directory has changed or has been added, see if we should enable/disable the tab control
-                manager.CheckTabControl();
+                manager.SetTabControl();
+                InitIni();
             }
         }
 
@@ -267,6 +352,26 @@ namespace Fallout4Ini
             return new string(chars);
         }
 
+        // Method to make a new array with new insorted lines at the new position
+        private string[] GetNewArray(string[] lines, string[] linesToAdd, int index)
+        {
+            string[] newLines = new string[lines.Length + linesToAdd.Length];
+            int j = 0;
+            for (int i = 0; i < newLines.Length; i++)
+            {
+                if (i == index + j && j < linesToAdd.Length)
+                {
+                    newLines[i] = linesToAdd[j];
+                    j++;
+                }
+                else
+                {
+                    newLines[i] = lines[i - j]; 
+                }
+            }
+            return newLines;
+        }
+
         // Method that executes if the user clicks the donation button
         private void donationButton_Click(object sender, EventArgs e)
         {
@@ -290,9 +395,22 @@ namespace Fallout4Ini
             manager.SetUnlockFPS();
         }
 
+        // Method that executes when the user clicks on the enable or disable depth of field
         private void depthBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             manager.SetDepthOfField();
+        }
+
+        // Method that executes when the user clicks the numericUpDown for first person FOV
+        private void firstFOVNum_ValueChanged(object sender, EventArgs e)
+        {
+            manager.SetFirstPersonFOV();
+        }
+
+        // Method that executes when the user clicks the numericUpDown for third person FOV
+        private void thirdFOVNum_ValueChanged(object sender, EventArgs e)
+        {
+            manager.SetThirdPersonFOV();
         }
 
     }

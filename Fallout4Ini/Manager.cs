@@ -22,7 +22,8 @@ namespace Fallout4Ini
         // So if the user changes the ini files manually, my program will respond to the changes (example: uncheck a checkbox)
         public void Update()
         {
-            string[] fallout4Lines, fallout4PrefsLines;
+            string[] fallout4Lines = null;
+            string[] fallout4PrefsLines = null;
             // Check on the Fallout4.ini file
             if (form.IniDir.Text != "")
             {
@@ -47,7 +48,8 @@ namespace Fallout4Ini
             if (form.IniDir.Text != "" && form.PrefsIniDir.Text != "")
             {
                 // Now do stuff with both file lines
-
+                CheckFirstPersonFOV(fallout4Lines, fallout4PrefsLines);
+                CheckThirdPersonFOV(fallout4Lines, fallout4PrefsLines);
             }
         }
 
@@ -76,11 +78,35 @@ namespace Fallout4Ini
                 form.DepthBox.SelectedIndex = 0;
             }
         }
+
+        // Function called by Update, which will set the First Person FOV accordingly
+        private void CheckFirstPersonFOV(string[] iniLines, string[] prefIniLines)
+        {
+            int value1 = Convert.ToInt32(iniLines[form.IsFound(iniLines, "fDefault1stPersonFOV=")].Substring(21));
+            int value2 = Convert.ToInt32(prefIniLines[form.IsFound(prefIniLines, "fDefault1stPersonFOV=")].Substring(21));
+            //If the two values are the same, display the FOV, else display the default 90 (this should not occur unless the user tampers with the files)
+            if (value1 == value2)
+                form.FirstFOVNum.Value = value1;
+            else
+                form.FirstFOVNum.Value = 90;
+        }
+
+        // Function called by Update, which will set the Third Person FOV accordingly
+        private void CheckThirdPersonFOV(string[] iniLines, string[] prefIniLines)
+        {
+            int value1 = Convert.ToInt32(iniLines[form.IsFound(iniLines, "fDefaultWorldFOV=")].Substring(17));
+            int value2 = Convert.ToInt32(prefIniLines[form.IsFound(prefIniLines, "fDefaultWorldFOV=")].Substring(17));
+            //If the two values are the same, display the FOV, else display the default 90 (this should not occur unless the user tampers with the files)
+            if (value1 == value2)
+                form.ThirdFOVNum.Value = value1;
+            else
+                form.ThirdFOVNum.Value = 90;
+        }
         
         /*------------------------------------------------Functions called by the form-----------------------------------------*/
 
         // Function that will check if the tab control should be active
-        public void CheckTabControl()
+        public void SetTabControl()
         {
             if (form.IniDir.Text != "" && form.PrefsIniDir.Text != "")
             {
@@ -149,6 +175,68 @@ namespace Fallout4Ini
                 // Now overwrite the old file with the line using append to file
                 form.ClearFile(form.PrefsIniDir.Text);
                 form.AppendFile(fileLines, form.PrefsIniDir.Text);
+            }
+            catch (UnauthorizedAccessException e)
+            {
+                MessageBox.Show("Please ensure that the ini files are not readonly", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
+        }
+        
+        // Function that will execute when the user changes First Person FOV
+        public void SetFirstPersonFOV()
+        {
+            try
+            {
+                int value = Convert.ToInt32(form.FirstFOVNum.Value);
+
+                string[] fileLines1 = form.GetFileLines(form.IniDir.Text);
+                string[] fileLines2 = form.GetFileLines(form.PrefsIniDir.Text);
+
+                int index1 = form.IsFound(fileLines1, "fDefault1stPersonFOV=");
+                int index2 = form.IsFound(fileLines2, "fDefault1stPersonFOV=");
+                if (index1 != -1 && index2 != -1)
+                {
+                    fileLines1[index1] = "fDefault1stPersonFOV=" + value;
+                    fileLines2[index2] = "fDefault1stPersonFOV=" + value;
+                }
+
+                // Now overwrite the old files with the line using append to file
+                form.ClearFile(form.IniDir.Text);
+                form.ClearFile(form.PrefsIniDir.Text);
+                form.AppendFile(fileLines1, form.IniDir.Text);
+                form.AppendFile(fileLines2, form.PrefsIniDir.Text);
+            }
+            catch (UnauthorizedAccessException e)
+            {
+                MessageBox.Show("Please ensure that the ini files are not readonly", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
+        }
+
+        // Function that will execute when the user changes Third Person FOV
+        public void SetThirdPersonFOV()
+        {
+            try
+            {
+                int value = Convert.ToInt32(form.ThirdFOVNum.Value);
+
+                string[] fileLines1 = form.GetFileLines(form.IniDir.Text);
+                string[] fileLines2 = form.GetFileLines(form.PrefsIniDir.Text);
+
+                int index1 = form.IsFound(fileLines1, "fDefaultWorldFOV=");
+                int index2 = form.IsFound(fileLines2, "fDefaultWorldFOV=");
+                if (index1 != -1 && index2 != -1)
+                {
+                    fileLines1[index1] = "fDefaultWorldFOV=" + value;
+                    fileLines2[index2] = "fDefaultWorldFOV=" + value;
+                }
+
+                // Now overwrite the old files with the line using append to file
+                form.ClearFile(form.IniDir.Text);
+                form.ClearFile(form.PrefsIniDir.Text);
+                form.AppendFile(fileLines1, form.IniDir.Text);
+                form.AppendFile(fileLines2, form.PrefsIniDir.Text);
             }
             catch (UnauthorizedAccessException e)
             {

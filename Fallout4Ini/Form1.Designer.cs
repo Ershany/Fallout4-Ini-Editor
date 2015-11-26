@@ -38,6 +38,8 @@
             this.donationButton = new System.Windows.Forms.Button();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.thirdFOVNum = new System.Windows.Forms.NumericUpDown();
+            this.firstFOVNum = new System.Windows.Forms.NumericUpDown();
             this.thirdFOVLabel = new System.Windows.Forms.Label();
             this.firstFOVLabel = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -53,14 +55,12 @@
             this.settingLabel = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.aboutButton = new System.Windows.Forms.Button();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.banner)).BeginInit();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.thirdFOVNum)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.firstFOVNum)).BeginInit();
             this.SuspendLayout();
             // 
             // fileSystemWatcher1
@@ -136,8 +136,8 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.numericUpDown2);
-            this.tabPage1.Controls.Add(this.numericUpDown1);
+            this.tabPage1.Controls.Add(this.thirdFOVNum);
+            this.tabPage1.Controls.Add(this.firstFOVNum);
             this.tabPage1.Controls.Add(this.thirdFOVLabel);
             this.tabPage1.Controls.Add(this.firstFOVLabel);
             this.tabPage1.Controls.Add(this.label4);
@@ -159,23 +159,69 @@
             this.tabPage1.Text = "General";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // thirdFOVNum
+            // 
+            this.thirdFOVNum.Location = new System.Drawing.Point(179, 106);
+            this.thirdFOVNum.Maximum = new decimal(new int[] {
+            140,
+            0,
+            0,
+            0});
+            this.thirdFOVNum.Minimum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.thirdFOVNum.Name = "thirdFOVNum";
+            this.thirdFOVNum.Size = new System.Drawing.Size(121, 20);
+            this.thirdFOVNum.TabIndex = 14;
+            this.thirdFOVNum.Value = new decimal(new int[] {
+            90,
+            0,
+            0,
+            0});
+            this.thirdFOVNum.ValueChanged += new System.EventHandler(this.thirdFOVNum_ValueChanged);
+            // 
+            // firstFOVNum
+            // 
+            this.firstFOVNum.Location = new System.Drawing.Point(179, 80);
+            this.firstFOVNum.Maximum = new decimal(new int[] {
+            140,
+            0,
+            0,
+            0});
+            this.firstFOVNum.Minimum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.firstFOVNum.Name = "firstFOVNum";
+            this.firstFOVNum.Size = new System.Drawing.Size(121, 20);
+            this.firstFOVNum.TabIndex = 13;
+            this.firstFOVNum.Value = new decimal(new int[] {
+            90,
+            0,
+            0,
+            0});
+            this.firstFOVNum.ValueChanged += new System.EventHandler(this.firstFOVNum_ValueChanged);
+            // 
             // thirdFOVLabel
             // 
             this.thirdFOVLabel.AutoSize = true;
             this.thirdFOVLabel.Location = new System.Drawing.Point(340, 108);
             this.thirdFOVLabel.Name = "thirdFOVLabel";
-            this.thirdFOVLabel.Size = new System.Drawing.Size(266, 13);
+            this.thirdFOVLabel.Size = new System.Drawing.Size(372, 13);
             this.thirdFOVLabel.TabIndex = 12;
-            this.thirdFOVLabel.Text = "Set the field of view of the camera in third person mode";
+            this.thirdFOVLabel.Text = "Set the field of view of the camera in third person mode (recommend 70 - 120)\r\n";
             // 
             // firstFOVLabel
             // 
             this.firstFOVLabel.AutoSize = true;
             this.firstFOVLabel.Location = new System.Drawing.Point(340, 83);
             this.firstFOVLabel.Name = "firstFOVLabel";
-            this.firstFOVLabel.Size = new System.Drawing.Size(262, 13);
+            this.firstFOVLabel.Size = new System.Drawing.Size(368, 13);
             this.firstFOVLabel.TabIndex = 11;
-            this.firstFOVLabel.Text = "Set the field of view of the camera in first person mode";
+            this.firstFOVLabel.Text = "Set the field of view of the camera in first person mode (recommend 70 - 120)\r\n";
             // 
             // label4
             // 
@@ -303,30 +349,6 @@
             this.aboutButton.UseVisualStyleBackColor = true;
             this.aboutButton.Click += new System.EventHandler(this.aboutButton_Click);
             // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.Location = new System.Drawing.Point(179, 80);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(121, 20);
-            this.numericUpDown1.TabIndex = 13;
-            this.numericUpDown1.Value = new decimal(new int[] {
-            80,
-            0,
-            0,
-            0});
-            // 
-            // numericUpDown2
-            // 
-            this.numericUpDown2.Location = new System.Drawing.Point(179, 106);
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(121, 20);
-            this.numericUpDown2.TabIndex = 14;
-            this.numericUpDown2.Value = new decimal(new int[] {
-            80,
-            0,
-            0,
-            0});
-            // 
             // EditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -351,8 +373,8 @@
             this.tabControl.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.thirdFOVNum)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.firstFOVNum)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -384,8 +406,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label firstFOVLabel;
         private System.Windows.Forms.Label thirdFOVLabel;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown thirdFOVNum;
+        private System.Windows.Forms.NumericUpDown firstFOVNum;
 
         // Accessors
         public System.Windows.Forms.TextBox PrefsIniDir
@@ -412,6 +434,16 @@
         {
             get { return depthBox; }
             set { depthBox = value; }
+        }
+        public System.Windows.Forms.NumericUpDown FirstFOVNum
+        {
+            get { return firstFOVNum; }
+            set { firstFOVNum = value; }
+        }
+        public System.Windows.Forms.NumericUpDown ThirdFOVNum
+        {
+            get { return thirdFOVNum; }
+            set { thirdFOVNum = value; }
         }
 
     }
