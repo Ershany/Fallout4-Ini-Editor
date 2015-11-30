@@ -290,12 +290,24 @@ namespace Fallout4Ini
                 }
                 else
                 {
+                    // Get the index of the lines were searching for
                     int index1 = form.IsFound(fileLines, "SIntroSequence=");
                     int index2 = form.IsFound(fileLines, "fChancesToPlayAlternateIntro=");
                     int index3 = form.IsFound(fileLines, "uMainMenuDelayBeforeAllowSkip=");
-                    fileLines[index1] = "";
-                    fileLines[index2] = "";
-                    fileLines[index3] = "";
+
+                    // Check to see if the index was found, if it was delete it from the fileLines
+                    if (index1 != -1)
+                    {
+                        fileLines = form.DeleteElementsInArray(fileLines, new string[] {"SIntroSequence=0"});
+                    }
+                    if (index2 != -1)
+                    {
+                        fileLines = form.DeleteElementsInArray(fileLines, new string[] {"fChancesToPlayAlternateIntro=0"});
+                    }
+                    if (index3 != -1)
+                    {
+                        fileLines = form.DeleteElementsInArray(fileLines, new string[] {"uMainMenuDelayBeforeAllowSkip=0"});
+                    }
                     form.ClearFile(form.IniDir.Text);
                     form.AppendFile(fileLines, form.IniDir.Text);
                 }

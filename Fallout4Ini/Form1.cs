@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Threading;
+using System.Linq;
 
 namespace Fallout4Ini
 {
@@ -395,15 +396,12 @@ namespace Fallout4Ini
             return newLines;
         }
 
-        // Method to delete elements out of an array and then shrink the array (uses LINQ <--- Why I chose C#)
+        // Method to delete elements out of an array and then shrink the array (uses LINQ)
         public string[] DeleteElementsInArray(string[] lines, string[] linesToDel)
         {
-            string[] newLines = new string[lines.Length - linesToDel.Length];
-            foreach(var line in lines) 
-            {
-                
-            }
-            return newLines;
+            return (from line in lines
+                    where !linesToDel.Contains(line)
+                    select line).ToArray();
         }
 
         // Method that executes if the user clicks the donation button
