@@ -14,9 +14,9 @@ namespace Fallout4Ini
 {
     public partial class EditorForm : Form
     {
-        private string metaDataFile = @"C:\Users\" + Environment.UserName + @"\Documents\Fallout4IniEditor.ini";
-        private Manager manager;
-        private bool running;
+        private string metaDataFile = @"C:\Users\" + Environment.UserName + @"\Documents\Fallout4IniEditor.ini"; // Metadata file's path
+        private Manager manager; // Manager object to manage the GUI components and ini files
+        private bool running; // Used for the async method
 
         public EditorForm()
         {
@@ -153,6 +153,29 @@ namespace Fallout4Ini
                 prefsIniLines = GetNewArray(prefsIniLines, new string[] {"fDefault1stPersonFOV=90"}, index + 1);
                 ClearFile(PrefsIniDir.Text);
                 AppendFile(prefsIniLines, PrefsIniDir.Text);
+            }
+
+            // Ensure that the lines for skip intro are not turned on (not useful for the program) if they are there, get rid of em
+            if (IsFound(iniLines, "SIntroSequence=1") != -1)
+            {
+                int index = IsFound(iniLines, "SIntroSequence=1");
+                iniLines[index] = "";
+                ClearFile(IniDir.Text);
+                AppendFile(iniLines, IniDir.Text);
+            }
+            if (IsFound(iniLines, "fChancesToPlayAlternateIntro=1") != -1)
+            {
+                int index = IsFound(iniLines, "fChancesToPlayAlternateIntro=1");
+                iniLines[index] = "";
+                ClearFile(IniDir.Text);
+                AppendFile(iniLines, IniDir.Text);
+            }
+            if (IsFound(iniLines, "uMainMenuDelayBeforeAllowSkip=1") != -1)
+            {
+                int index = IsFound(iniLines, "uMainMenuDelayBeforeAllowSkip=1");
+                iniLines[index] = "";
+                ClearFile(IniDir.Text);
+                AppendFile(iniLines, IniDir.Text);
             }
         }
 
@@ -352,8 +375,8 @@ namespace Fallout4Ini
             return new string(chars);
         }
 
-        // Method to make a new array with new insorted lines at the new position
-        private string[] GetNewArray(string[] lines, string[] linesToAdd, int index)
+        // Method to make a new array with new lines at the new position
+        public string[] GetNewArray(string[] lines, string[] linesToAdd, int index)
         {
             string[] newLines = new string[lines.Length + linesToAdd.Length];
             int j = 0;
@@ -368,6 +391,17 @@ namespace Fallout4Ini
                 {
                     newLines[i] = lines[i - j]; 
                 }
+            }
+            return newLines;
+        }
+
+        // Method to delete elements out of an array and then shrink the array (uses LINQ <--- Why I chose C#)
+        public string[] DeleteElementsInArray(string[] lines, string[] linesToDel)
+        {
+            string[] newLines = new string[lines.Length - linesToDel.Length];
+            foreach(var line in lines) 
+            {
+                
             }
             return newLines;
         }
@@ -411,6 +445,12 @@ namespace Fallout4Ini
         private void thirdFOVNum_ValueChanged(object sender, EventArgs e)
         {
             manager.SetThirdPersonFOV();
+        }
+
+        // Method that executes when the user clicks the skip intro check box
+        private void skipIntroBox_CheckedChanged(object sender, EventArgs e)
+        {
+            manager.SetIntroVideo();
         }
 
     }

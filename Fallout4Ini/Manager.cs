@@ -30,7 +30,7 @@ namespace Fallout4Ini
                 fallout4Lines = form.GetFileLines(form.IniDir.Text);
 
                 // Now do stuff with these lines
-
+                CheckSkipVideo(fallout4Lines);
             }
 
             // Check on the Fallout4Prefs.ini file
@@ -101,6 +101,23 @@ namespace Fallout4Ini
                 form.ThirdFOVNum.Value = value1;
             else
                 form.ThirdFOVNum.Value = 90;
+        }
+
+        // Function called by Update, which will set the Skip Intro Video checkbox accordingly
+        private void CheckSkipVideo(string[] iniLines)
+        {
+            int index1 = form.IsFound(iniLines, "SIntroSequence=0");
+            int index2 = form.IsFound(iniLines, "fChancesToPlayAlternateIntro=0");
+            int index3 = form.IsFound(iniLines, "uMainMenuDelayBeforeAllowSkip=0");
+            // If all of the lines exist, then the intro video is being skipped
+            if (index1 != -1 && index2 != -1 && index3 != -1)
+            {
+                form.SkipIntroBox.Checked = true;
+            }
+            else
+            {
+                form.SkipIntroBox.Checked = false;
+            }
         }
         
         /*------------------------------------------------Functions called by the form-----------------------------------------*/
@@ -237,6 +254,52 @@ namespace Fallout4Ini
                 form.ClearFile(form.PrefsIniDir.Text);
                 form.AppendFile(fileLines1, form.IniDir.Text);
                 form.AppendFile(fileLines2, form.PrefsIniDir.Text);
+            }
+            catch (UnauthorizedAccessException e)
+            {
+                MessageBox.Show("Please ensure that the ini files are not readonly", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
+        }
+
+        // Function that will execute when the user clicks the skip intro checkbox
+        public void SetIntroVideo()
+        {
+            try
+            {
+                string[] fileLines = form.GetFileLines(form.IniDir.Text);
+
+                // If the box is checked, add the lines, else delete the lines from the file (this is the only way to revert the changes)
+                if (form.SkipIntroBox.Checked)
+                {
+                    int index = form.IsFound(fileLines, "[General]");
+                    if (form.IsFound(fileLines, "uMainMenuDelayBeforeAllowSkip=0") == -1)
+                    {
+                        fileLines = form.GetNewArray(fileLines, new string[] { "uMainMenuDelayBeforeAllowSkip=0" }, index + 1);
+                    }
+                    if (form.IsFound(fileLines, "fChancesToPlayAlternateIntro=0") == -1)
+                    {
+                        fileLines = form.GetNewArray(fileLines, new string[] { "fChancesToPlayAlternateIntro=0" }, index + 1);
+                    }
+                    if (form.IsFound(fileLines, "SIntroSequence=0") == -1)
+                    {
+                        fileLines = form.GetNewArray(fileLines, new string[] { "SIntroSequence=0" }, index + 1);
+                    }
+                    form.ClearFile(form.IniDir.Text);
+                    form.AppendFile(fileLines, form.IniDir.Text);
+                }
+                else
+                {
+                    int index1 = form.IsFound(fileLines, "SIntroSequence=");
+                    int index2 = form.IsFound(fileLines, "fChancesToPlayAlternateIntro=");
+                    int index3 = form.IsFound(fileLines, "uMainMenuDelayBeforeAllowSkip=");
+                    fileLines[index1] = "";
+                    fileLines[index2] = "";
+                    fileLines[index3] = "";
+                    form.ClearFile(form.IniDir.Text);
+                    form.AppendFile(fileLines, form.IniDir.Text);
+                }
+                
             }
             catch (UnauthorizedAccessException e)
             {

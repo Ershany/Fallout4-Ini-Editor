@@ -55,12 +55,19 @@
             this.settingLabel = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.aboutButton = new System.Windows.Forms.Button();
+            this.settingLabel2 = new System.Windows.Forms.Label();
+            this.valueLabel2 = new System.Windows.Forms.Label();
+            this.descriptionLabel2 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.skipIntroBox = new System.Windows.Forms.CheckBox();
+            this.skipIntroLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.banner)).BeginInit();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.thirdFOVNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.firstFOVNum)).BeginInit();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // fileSystemWatcher1
@@ -331,6 +338,12 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.skipIntroLabel);
+            this.tabPage2.Controls.Add(this.skipIntroBox);
+            this.tabPage2.Controls.Add(this.label5);
+            this.tabPage2.Controls.Add(this.descriptionLabel2);
+            this.tabPage2.Controls.Add(this.valueLabel2);
+            this.tabPage2.Controls.Add(this.settingLabel2);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -348,6 +361,64 @@
             this.aboutButton.Text = "About";
             this.aboutButton.UseVisualStyleBackColor = true;
             this.aboutButton.Click += new System.EventHandler(this.aboutButton_Click);
+            // 
+            // settingLabel2
+            // 
+            this.settingLabel2.AutoSize = true;
+            this.settingLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.settingLabel2.Location = new System.Drawing.Point(15, 3);
+            this.settingLabel2.Name = "settingLabel2";
+            this.settingLabel2.Size = new System.Drawing.Size(52, 15);
+            this.settingLabel2.TabIndex = 0;
+            this.settingLabel2.Text = "Setting";
+            // 
+            // valueLabel2
+            // 
+            this.valueLabel2.AutoSize = true;
+            this.valueLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.valueLabel2.Location = new System.Drawing.Point(176, 3);
+            this.valueLabel2.Name = "valueLabel2";
+            this.valueLabel2.Size = new System.Drawing.Size(43, 15);
+            this.valueLabel2.TabIndex = 1;
+            this.valueLabel2.Text = "Value";
+            // 
+            // descriptionLabel2
+            // 
+            this.descriptionLabel2.AutoSize = true;
+            this.descriptionLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.descriptionLabel2.Location = new System.Drawing.Point(337, 3);
+            this.descriptionLabel2.Name = "descriptionLabel2";
+            this.descriptionLabel2.Size = new System.Drawing.Size(80, 15);
+            this.descriptionLabel2.TabIndex = 2;
+            this.descriptionLabel2.Text = "Description";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(18, 33);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(117, 13);
+            this.label5.TabIndex = 3;
+            this.label5.Text = "Skip Introduction Video";
+            // 
+            // skipIntroBox
+            // 
+            this.skipIntroBox.AutoSize = true;
+            this.skipIntroBox.Location = new System.Drawing.Point(179, 32);
+            this.skipIntroBox.Name = "skipIntroBox";
+            this.skipIntroBox.Size = new System.Drawing.Size(15, 14);
+            this.skipIntroBox.TabIndex = 4;
+            this.skipIntroBox.UseVisualStyleBackColor = true;
+            this.skipIntroBox.CheckedChanged += new System.EventHandler(this.skipIntroBox_CheckedChanged);
+            // 
+            // skipIntroLabel
+            // 
+            this.skipIntroLabel.AutoSize = true;
+            this.skipIntroLabel.Location = new System.Drawing.Point(340, 32);
+            this.skipIntroLabel.Name = "skipIntroLabel";
+            this.skipIntroLabel.Size = new System.Drawing.Size(249, 13);
+            this.skipIntroLabel.TabIndex = 5;
+            this.skipIntroLabel.Text = "Check this to skip the introduction video on start-up";
             // 
             // EditorForm
             // 
@@ -375,6 +446,8 @@
             this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.thirdFOVNum)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.firstFOVNum)).EndInit();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -408,6 +481,12 @@
         private System.Windows.Forms.Label thirdFOVLabel;
         private System.Windows.Forms.NumericUpDown thirdFOVNum;
         private System.Windows.Forms.NumericUpDown firstFOVNum;
+        private System.Windows.Forms.Label skipIntroLabel;
+        private System.Windows.Forms.CheckBox skipIntroBox;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label descriptionLabel2;
+        private System.Windows.Forms.Label valueLabel2;
+        private System.Windows.Forms.Label settingLabel2;
 
         // Accessors
         public System.Windows.Forms.TextBox PrefsIniDir
@@ -444,6 +523,11 @@
         {
             get { return thirdFOVNum; }
             set { thirdFOVNum = value; }
+        }
+        public System.Windows.Forms.CheckBox SkipIntroBox
+        {
+            get { return skipIntroBox; }
+            set { skipIntroBox = value; }
         }
 
     }
