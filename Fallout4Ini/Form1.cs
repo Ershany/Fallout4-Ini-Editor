@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Threading;
-using System.Linq;
 
 namespace Fallout4Ini
 {
@@ -466,5 +465,24 @@ namespace Fallout4Ini
             manager.SetPauseAltTab();
         }
 
+        // Method that executes when the user clicks the reset fallout4ini button
+        private void resetIniButton_Click(object sender, EventArgs e)
+        {
+            string file = Properties.Resources.Fallout4;
+            ClearFile(IniDir.Text);
+            File.AppendAllText(IniDir.Text, file);
+            InitIni();
+            MessageBox.Show("Fallout4.ini has been reset, make sure to change your settings again when you open the game!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
+
+        // Method that executes when the user clicks the reset fallout4prefsini button
+        private void resetPrefsIniButton_Click(object sender, EventArgs e)
+        {
+            string file = Properties.Resources.Fallout4Prefs;
+            ClearFile(PrefsIniDir.Text);
+            File.AppendAllText(PrefsIniDir.Text, file);
+            InitIni();
+            MessageBox.Show("Fallout4Prefs.ini has been reset, make sure to change your settings again when you open the game!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
     }
 }

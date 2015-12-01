@@ -54,6 +54,9 @@
             this.valueLabel = new System.Windows.Forms.Label();
             this.settingLabel = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.pauseAltTabLabel = new System.Windows.Forms.Label();
+            this.pauseAltTabBox = new System.Windows.Forms.CheckBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.skipIntroLabel = new System.Windows.Forms.Label();
             this.skipIntroBox = new System.Windows.Forms.CheckBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -61,9 +64,8 @@
             this.valueLabel2 = new System.Windows.Forms.Label();
             this.settingLabel2 = new System.Windows.Forms.Label();
             this.aboutButton = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
-            this.pauseAltTabBox = new System.Windows.Forms.CheckBox();
-            this.pauseAltTabLabel = new System.Windows.Forms.Label();
+            this.resetIniButton = new System.Windows.Forms.Button();
+            this.resetPrefsIniButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.banner)).BeginInit();
             this.tabControl.SuspendLayout();
@@ -126,7 +128,7 @@
             // 
             // donationButton
             // 
-            this.donationButton.Location = new System.Drawing.Point(710, 70);
+            this.donationButton.Location = new System.Drawing.Point(710, 68);
             this.donationButton.Name = "donationButton";
             this.donationButton.Size = new System.Drawing.Size(75, 23);
             this.donationButton.TabIndex = 5;
@@ -358,6 +360,34 @@
             this.tabPage2.Text = "Misc";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // pauseAltTabLabel
+            // 
+            this.pauseAltTabLabel.AutoSize = true;
+            this.pauseAltTabLabel.Location = new System.Drawing.Point(340, 58);
+            this.pauseAltTabLabel.Name = "pauseAltTabLabel";
+            this.pauseAltTabLabel.Size = new System.Drawing.Size(182, 13);
+            this.pauseAltTabLabel.TabIndex = 8;
+            this.pauseAltTabLabel.Text = "Check this to pause when you alt tab";
+            // 
+            // pauseAltTabBox
+            // 
+            this.pauseAltTabBox.AutoSize = true;
+            this.pauseAltTabBox.Location = new System.Drawing.Point(179, 58);
+            this.pauseAltTabBox.Name = "pauseAltTabBox";
+            this.pauseAltTabBox.Size = new System.Drawing.Size(15, 14);
+            this.pauseAltTabBox.TabIndex = 7;
+            this.pauseAltTabBox.UseVisualStyleBackColor = true;
+            this.pauseAltTabBox.CheckedChanged += new System.EventHandler(this.pauseAltTabBox_CheckedChanged);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(18, 58);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(124, 13);
+            this.label6.TabIndex = 6;
+            this.label6.Text = "Pause When Alt-Tabbed";
+            // 
             // skipIntroLabel
             // 
             this.skipIntroLabel.AutoSize = true;
@@ -418,7 +448,7 @@
             // 
             // aboutButton
             // 
-            this.aboutButton.Location = new System.Drawing.Point(710, 100);
+            this.aboutButton.Location = new System.Drawing.Point(710, 98);
             this.aboutButton.Name = "aboutButton";
             this.aboutButton.Size = new System.Drawing.Size(75, 23);
             this.aboutButton.TabIndex = 7;
@@ -426,39 +456,33 @@
             this.aboutButton.UseVisualStyleBackColor = true;
             this.aboutButton.Click += new System.EventHandler(this.aboutButton_Click);
             // 
-            // label6
+            // resetIniButton
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(18, 58);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(124, 13);
-            this.label6.TabIndex = 6;
-            this.label6.Text = "Pause When Alt-Tabbed";
+            this.resetIniButton.Location = new System.Drawing.Point(581, 68);
+            this.resetIniButton.Name = "resetIniButton";
+            this.resetIniButton.Size = new System.Drawing.Size(123, 23);
+            this.resetIniButton.TabIndex = 8;
+            this.resetIniButton.Text = "Reset Fallout4.ini";
+            this.resetIniButton.UseVisualStyleBackColor = true;
+            this.resetIniButton.Click += new System.EventHandler(this.resetIniButton_Click);
             // 
-            // pauseAltTabBox
+            // resetPrefsIniButton
             // 
-            this.pauseAltTabBox.AutoSize = true;
-            this.pauseAltTabBox.Location = new System.Drawing.Point(179, 58);
-            this.pauseAltTabBox.Name = "pauseAltTabBox";
-            this.pauseAltTabBox.Size = new System.Drawing.Size(15, 14);
-            this.pauseAltTabBox.TabIndex = 7;
-            this.pauseAltTabBox.UseVisualStyleBackColor = true;
-            this.pauseAltTabBox.CheckedChanged += new System.EventHandler(this.pauseAltTabBox_CheckedChanged);
-            // 
-            // pauseAltTabLabel
-            // 
-            this.pauseAltTabLabel.AutoSize = true;
-            this.pauseAltTabLabel.Location = new System.Drawing.Point(340, 58);
-            this.pauseAltTabLabel.Name = "pauseAltTabLabel";
-            this.pauseAltTabLabel.Size = new System.Drawing.Size(182, 13);
-            this.pauseAltTabLabel.TabIndex = 8;
-            this.pauseAltTabLabel.Text = "Check this to pause when you alt tab";
+            this.resetPrefsIniButton.Location = new System.Drawing.Point(581, 98);
+            this.resetPrefsIniButton.Name = "resetPrefsIniButton";
+            this.resetPrefsIniButton.Size = new System.Drawing.Size(123, 23);
+            this.resetPrefsIniButton.TabIndex = 9;
+            this.resetPrefsIniButton.Text = "Reset Fallout4Prefs.ini";
+            this.resetPrefsIniButton.UseVisualStyleBackColor = true;
+            this.resetPrefsIniButton.Click += new System.EventHandler(this.resetPrefsIniButton_Click);
             // 
             // EditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(797, 561);
+            this.Controls.Add(this.resetPrefsIniButton);
+            this.Controls.Add(this.resetIniButton);
             this.Controls.Add(this.aboutButton);
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.donationButton);
@@ -524,6 +548,8 @@
         private System.Windows.Forms.CheckBox pauseAltTabBox;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label pauseAltTabLabel;
+        private System.Windows.Forms.Button resetPrefsIniButton;
+        private System.Windows.Forms.Button resetIniButton;
 
         // Accessors
         public System.Windows.Forms.TextBox PrefsIniDir

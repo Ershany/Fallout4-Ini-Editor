@@ -69,5 +69,64 @@ namespace Fallout4Ini.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [General]
+        ///sLanguage=en
+        ///uGridsToLoad=5
+        ///uExterior Cell Buffer=36
+        ///bDisableAllGore=0
+        ///
+        ///[ScreenSplatter]
+        ///bBloodSplatterEnabled=1
+        ///
+        ///[Display]
+        ///iPresentInterval=1
+        ///bDeferredCommands=1
+        ///fShadowLODMaxStartFade=1000.0
+        ///fSpecularLODMaxStartFade=2000.0
+        ///fLightLODMaxStartFade=3500.0
+        ///iShadowMapResolutionPrimary=2048
+        ///bAllowScreenshot=1
+        ///fMeshLODLevel1FadeDist=3500.0000
+        ///fMeshLODLevel2FadeDist=2000.0000
+        ///fMeshLODFadePercentDefault=1.2000
+        ///bNvGodraysEnable=1
+        ///bDynamicObjectQueryManager=1
+        ///bMultiThreadedAccumulation [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string Fallout4 {
+            get {
+                return ResourceManager.GetString("Fallout4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [Display]
+        ///flocalShadowMapHalveEveryXUnit=750.0000
+        ///focusShadowMapDoubleEveryXUnit=450.0000
+        ///fShadowBiasScale=1.0000
+        ///fDirShadowDistance=20000
+        ///fShadowDistance=20000
+        ///uiOrthoShadowFilter=3
+        ///uiShadowFilter=3
+        ///iShadowMapResolution=4096
+        ///uPipboyTargetHeight=700
+        ///uPipboyTargetWidth=876
+        ///iVolumetricLightingQuality=2
+        ///bVolumetricLightingEnable=1
+        ///bSAOEnable=1
+        ///iDirShadowSplits=3
+        ///bVolumetricLightingForceCasters=0
+        ///iTiledLightingMinLights=40
+        ///bComputeShaderDeferredTiledLighting=1
+        ///iMaxFocusShadowsDialogue=4
+        ///iMaxF [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string Fallout4Prefs {
+            get {
+                return ResourceManager.GetString("Fallout4Prefs", resourceCulture);
+            }
+        }
     }
 }
