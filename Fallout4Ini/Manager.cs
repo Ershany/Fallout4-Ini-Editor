@@ -31,6 +31,7 @@ namespace Fallout4Ini
 
                 // Now do stuff with these lines
                 CheckSkipVideo(fallout4Lines);
+                checkPausAltTab(fallout4Lines);
             }
 
             // Check on the Fallout4Prefs.ini file
@@ -117,6 +118,19 @@ namespace Fallout4Ini
             else
             {
                 form.SkipIntroBox.Checked = false;
+            }
+        }
+
+        //Function called by Update, which will set the PauseAltTab checkbox accordingly
+        private void checkPausAltTab(string[] iniLines)
+        {
+            if (form.IsFound(iniLines, "bAlwaysActive=1") != -1)
+            {
+                form.PauseAltTabBox.Checked = false;
+            }
+            else if (form.IsFound(iniLines, "bAlwaysActive=0") != -1)
+            {
+                form.PauseAltTabBox.Checked = true;
             }
         }
         
@@ -314,6 +328,32 @@ namespace Fallout4Ini
                 
             }
             catch (UnauthorizedAccessException e)
+            {
+                MessageBox.Show("Please ensure that the ini files are not readonly", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
+        }
+
+        // Function that executes when the user clicks on the Pause when alt tabbed checkbox
+        public void SetPauseAltTab()
+        {
+            try
+            {
+                string[] fileLines = form.GetFileLines(form.IniDir.Text);
+                int value = 1;
+
+                // Check to see if it was checked or unchecked
+                if (form.PauseAltTabBox.Checked)
+                {
+                    value = 0;
+                }
+
+                // Now get the index of the line and manipulate it
+                fileLines[form.IsFound(fileLines, "bAlwaysActive=")] = "bAlwaysActive=" + value;
+                form.ClearFile(form.IniDir.Text);
+                form.AppendFile(fileLines, form.IniDir.Text);
+            }
+            catch (UnauthorizedAccessException)
             {
                 MessageBox.Show("Please ensure that the ini files are not readonly", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();

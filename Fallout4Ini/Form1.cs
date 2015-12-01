@@ -178,6 +178,15 @@ namespace Fallout4Ini
                 ClearFile(IniDir.Text);
                 AppendFile(iniLines, IniDir.Text);
             }
+
+            // Ensure that the lines for pausing when alt tabbed are in the files
+            if (IsFound(iniLines, "bAlwaysActive=") == -1)
+            {
+                int index = IsFound(iniLines, "[General]");
+                iniLines = GetNewArray(iniLines, new string[] {"bAlwaysActive=0"}, index + 1);
+                ClearFile(IniDir.Text);
+                AppendFile(iniLines, IniDir.Text);
+            }
         }
 
         // Directory picking code
@@ -449,6 +458,12 @@ namespace Fallout4Ini
         private void skipIntroBox_CheckedChanged(object sender, EventArgs e)
         {
             manager.SetIntroVideo();
+        }
+
+        // Method that executes when the user clicks the pause to alt tab check box
+        private void pauseAltTabBox_CheckedChanged(object sender, EventArgs e)
+        {
+            manager.SetPauseAltTab();
         }
 
     }

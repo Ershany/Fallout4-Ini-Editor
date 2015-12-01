@@ -54,13 +54,16 @@
             this.valueLabel = new System.Windows.Forms.Label();
             this.settingLabel = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.aboutButton = new System.Windows.Forms.Button();
-            this.settingLabel2 = new System.Windows.Forms.Label();
-            this.valueLabel2 = new System.Windows.Forms.Label();
-            this.descriptionLabel2 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.skipIntroBox = new System.Windows.Forms.CheckBox();
             this.skipIntroLabel = new System.Windows.Forms.Label();
+            this.skipIntroBox = new System.Windows.Forms.CheckBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.descriptionLabel2 = new System.Windows.Forms.Label();
+            this.valueLabel2 = new System.Windows.Forms.Label();
+            this.settingLabel2 = new System.Windows.Forms.Label();
+            this.aboutButton = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.pauseAltTabBox = new System.Windows.Forms.CheckBox();
+            this.pauseAltTabLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.banner)).BeginInit();
             this.tabControl.SuspendLayout();
@@ -338,6 +341,9 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.pauseAltTabLabel);
+            this.tabPage2.Controls.Add(this.pauseAltTabBox);
+            this.tabPage2.Controls.Add(this.label6);
             this.tabPage2.Controls.Add(this.skipIntroLabel);
             this.tabPage2.Controls.Add(this.skipIntroBox);
             this.tabPage2.Controls.Add(this.label5);
@@ -352,35 +358,33 @@
             this.tabPage2.Text = "Misc";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // aboutButton
+            // skipIntroLabel
             // 
-            this.aboutButton.Location = new System.Drawing.Point(710, 100);
-            this.aboutButton.Name = "aboutButton";
-            this.aboutButton.Size = new System.Drawing.Size(75, 23);
-            this.aboutButton.TabIndex = 7;
-            this.aboutButton.Text = "About";
-            this.aboutButton.UseVisualStyleBackColor = true;
-            this.aboutButton.Click += new System.EventHandler(this.aboutButton_Click);
+            this.skipIntroLabel.AutoSize = true;
+            this.skipIntroLabel.Location = new System.Drawing.Point(340, 32);
+            this.skipIntroLabel.Name = "skipIntroLabel";
+            this.skipIntroLabel.Size = new System.Drawing.Size(249, 13);
+            this.skipIntroLabel.TabIndex = 5;
+            this.skipIntroLabel.Text = "Check this to skip the introduction video on start-up";
             // 
-            // settingLabel2
+            // skipIntroBox
             // 
-            this.settingLabel2.AutoSize = true;
-            this.settingLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.settingLabel2.Location = new System.Drawing.Point(15, 3);
-            this.settingLabel2.Name = "settingLabel2";
-            this.settingLabel2.Size = new System.Drawing.Size(52, 15);
-            this.settingLabel2.TabIndex = 0;
-            this.settingLabel2.Text = "Setting";
+            this.skipIntroBox.AutoSize = true;
+            this.skipIntroBox.Location = new System.Drawing.Point(179, 33);
+            this.skipIntroBox.Name = "skipIntroBox";
+            this.skipIntroBox.Size = new System.Drawing.Size(15, 14);
+            this.skipIntroBox.TabIndex = 4;
+            this.skipIntroBox.UseVisualStyleBackColor = true;
+            this.skipIntroBox.CheckedChanged += new System.EventHandler(this.skipIntroBox_CheckedChanged);
             // 
-            // valueLabel2
+            // label5
             // 
-            this.valueLabel2.AutoSize = true;
-            this.valueLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.valueLabel2.Location = new System.Drawing.Point(176, 3);
-            this.valueLabel2.Name = "valueLabel2";
-            this.valueLabel2.Size = new System.Drawing.Size(43, 15);
-            this.valueLabel2.TabIndex = 1;
-            this.valueLabel2.Text = "Value";
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(18, 33);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(117, 13);
+            this.label5.TabIndex = 3;
+            this.label5.Text = "Skip Introduction Video";
             // 
             // descriptionLabel2
             // 
@@ -392,33 +396,63 @@
             this.descriptionLabel2.TabIndex = 2;
             this.descriptionLabel2.Text = "Description";
             // 
-            // label5
+            // valueLabel2
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(18, 33);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(117, 13);
-            this.label5.TabIndex = 3;
-            this.label5.Text = "Skip Introduction Video";
+            this.valueLabel2.AutoSize = true;
+            this.valueLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.valueLabel2.Location = new System.Drawing.Point(176, 3);
+            this.valueLabel2.Name = "valueLabel2";
+            this.valueLabel2.Size = new System.Drawing.Size(43, 15);
+            this.valueLabel2.TabIndex = 1;
+            this.valueLabel2.Text = "Value";
             // 
-            // skipIntroBox
+            // settingLabel2
             // 
-            this.skipIntroBox.AutoSize = true;
-            this.skipIntroBox.Location = new System.Drawing.Point(179, 32);
-            this.skipIntroBox.Name = "skipIntroBox";
-            this.skipIntroBox.Size = new System.Drawing.Size(15, 14);
-            this.skipIntroBox.TabIndex = 4;
-            this.skipIntroBox.UseVisualStyleBackColor = true;
-            this.skipIntroBox.CheckedChanged += new System.EventHandler(this.skipIntroBox_CheckedChanged);
+            this.settingLabel2.AutoSize = true;
+            this.settingLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.settingLabel2.Location = new System.Drawing.Point(15, 3);
+            this.settingLabel2.Name = "settingLabel2";
+            this.settingLabel2.Size = new System.Drawing.Size(52, 15);
+            this.settingLabel2.TabIndex = 0;
+            this.settingLabel2.Text = "Setting";
             // 
-            // skipIntroLabel
+            // aboutButton
             // 
-            this.skipIntroLabel.AutoSize = true;
-            this.skipIntroLabel.Location = new System.Drawing.Point(340, 32);
-            this.skipIntroLabel.Name = "skipIntroLabel";
-            this.skipIntroLabel.Size = new System.Drawing.Size(249, 13);
-            this.skipIntroLabel.TabIndex = 5;
-            this.skipIntroLabel.Text = "Check this to skip the introduction video on start-up";
+            this.aboutButton.Location = new System.Drawing.Point(710, 100);
+            this.aboutButton.Name = "aboutButton";
+            this.aboutButton.Size = new System.Drawing.Size(75, 23);
+            this.aboutButton.TabIndex = 7;
+            this.aboutButton.Text = "About";
+            this.aboutButton.UseVisualStyleBackColor = true;
+            this.aboutButton.Click += new System.EventHandler(this.aboutButton_Click);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(18, 58);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(124, 13);
+            this.label6.TabIndex = 6;
+            this.label6.Text = "Pause When Alt-Tabbed";
+            // 
+            // pauseAltTabBox
+            // 
+            this.pauseAltTabBox.AutoSize = true;
+            this.pauseAltTabBox.Location = new System.Drawing.Point(179, 58);
+            this.pauseAltTabBox.Name = "pauseAltTabBox";
+            this.pauseAltTabBox.Size = new System.Drawing.Size(15, 14);
+            this.pauseAltTabBox.TabIndex = 7;
+            this.pauseAltTabBox.UseVisualStyleBackColor = true;
+            this.pauseAltTabBox.CheckedChanged += new System.EventHandler(this.pauseAltTabBox_CheckedChanged);
+            // 
+            // pauseAltTabLabel
+            // 
+            this.pauseAltTabLabel.AutoSize = true;
+            this.pauseAltTabLabel.Location = new System.Drawing.Point(340, 58);
+            this.pauseAltTabLabel.Name = "pauseAltTabLabel";
+            this.pauseAltTabLabel.Size = new System.Drawing.Size(182, 13);
+            this.pauseAltTabLabel.TabIndex = 8;
+            this.pauseAltTabLabel.Text = "Check this to pause when you alt tab";
             // 
             // EditorForm
             // 
@@ -487,6 +521,9 @@
         private System.Windows.Forms.Label descriptionLabel2;
         private System.Windows.Forms.Label valueLabel2;
         private System.Windows.Forms.Label settingLabel2;
+        private System.Windows.Forms.CheckBox pauseAltTabBox;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label pauseAltTabLabel;
 
         // Accessors
         public System.Windows.Forms.TextBox PrefsIniDir
@@ -528,6 +565,11 @@
         {
             get { return skipIntroBox; }
             set { skipIntroBox = value; }
+        }
+        public System.Windows.Forms.CheckBox PauseAltTabBox
+        {
+            get { return pauseAltTabBox; }
+            set { pauseAltTabBox = value; }
         }
 
     }
