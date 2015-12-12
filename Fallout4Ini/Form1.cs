@@ -186,6 +186,22 @@ namespace Fallout4Ini
                 ClearFile(IniDir.Text);
                 AppendFile(iniLines, IniDir.Text);
             }
+
+            // Ensure that the lines for fixing the mouse sensitivity are in the files
+            if (IsFound(iniLines, "fPitchSpeedRatio=") == -1)
+            {
+                int index = IsFound(iniLines, "[Controls]");
+                iniLines = GetNewArray(iniLines, new string[] {"fPitchSpeedRatio=0.5625"}, index + 1);
+                ClearFile(IniDir.Text);
+                AppendFile(iniLines, IniDir.Text);
+            }
+            if (IsFound(iniLines, "fIronSightsPitchSpeedRatio=") == -1)
+            {
+                int index = IsFound(iniLines, "[Controls]");
+                iniLines = GetNewArray(iniLines, new string[] {"fIronSightsPitchSpeedRatio=0.8000"}, index + 1);
+                ClearFile(IniDir.Text);
+                AppendFile(iniLines, IniDir.Text);
+            }
         }
 
         // Directory picking code
@@ -499,6 +515,21 @@ namespace Fallout4Ini
         private void highResBox_CheckedChanged(object sender, EventArgs e)
         {
             manager.SetHighRes();
+        }
+
+        private void label12_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://staticdelivery.nexusmods.com/mods/1151/images/3771-0-1448914746.gif");
+        }
+
+        private void innerGlowBox_CheckedChanged(object sender, EventArgs e)
+        {
+            manager.SetInnerGlow();
+        }
+
+        private void fixMouseBox_CheckedChanged(object sender, EventArgs e)
+        {
+            manager.SetFixMouse();
         }
     }
 }

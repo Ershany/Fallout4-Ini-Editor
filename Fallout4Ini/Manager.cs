@@ -35,6 +35,8 @@ namespace Fallout4Ini
                 CheckIncreaseFPS(fallout4Lines);
                 CheckRemoveStutter(fallout4Lines);
                 CheckHighRes(fallout4Lines);
+                CheckInnerGlow(fallout4Lines);
+                CheckFixMouse(fallout4Lines);
             }
 
             // Check on the Fallout4Prefs.ini file
@@ -175,6 +177,32 @@ namespace Fallout4Ini
             else
             {
                 form.HighResBox.Checked = false;
+            }
+        }
+
+        // Function called by Update, which will set InnerGlow checkbox accordingly
+        private void CheckInnerGlow(string[] iniLines)
+        {
+            if (form.IsFound(iniLines, "sStartingConsoleCommand=cl off") != -1)
+            {
+                form.InnerGlowBox.Checked = true;
+            }
+            else
+            {
+                form.InnerGlowBox.Checked = false;
+            }
+        }
+
+        // Function called by Update, which will set FixMouse checkbox accordingly
+        private void CheckFixMouse(string[] iniLines)
+        {
+            if (form.IsFound(iniLines, "fIronSightsPitchSpeedRatio=1.0000") != -1 && form.IsFound(iniLines, "fPitchSpeedRatio=1.0000") != -1)
+            {
+                form.FixMouseBox.Checked = true;
+            }
+            else
+            {
+                form.FixMouseBox.Checked = false;
             }
         }
         
@@ -498,6 +526,70 @@ namespace Fallout4Ini
                 {
                     fileLines = form.DeleteElementsInArray(fileLines, new string[] {"bForceUpdateDiffuseOnly=0", "iTextureDegradeDistance0=1600", "iTextureDegradeDistance1=3000", "iTextureUpgradeDistance0=1200", "iTextureUpgradeDistance1=2400"});
                 }
+
+                form.ClearFile(form.IniDir.Text);
+                form.AppendFile(fileLines, form.IniDir.Text);
+            }
+            catch (UnauthorizedAccessException)
+            {
+                MessageBox.Show("Please ensure that the ini files are not readonly", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
+        }
+
+        // Function that executes when the user clicks on the innerGlow checkbox
+        public void SetInnerGlow()
+        {
+            try
+            {
+                string[] fileLines = form.GetFileLines(form.IniDir.Text);
+
+                // Check to see if the checkbox was checked or unchecked
+                if (form.InnerGlowBox.Checked)
+                {
+                    // Ensure that the lines are not there to duplicate them
+                    if (form.IsFound(fileLines, "sStartingConsoleCommand=cl off") == -1)
+                    {
+                        // Needs to get written under the general header, so find the index of the header
+                        int index = form.IsFound(fileLines, "[General]");
+
+                        fileLines = form.GetNewArray(fileLines, new string[] {"sStartingConsoleCommand=cl off"}, index + 1);
+                    }
+                }
+                else
+                {
+                    fileLines = form.DeleteElementsInArray(fileLines, new string[] {"sStartingConsoleCommand=cl off"});
+                }
+
+                form.ClearFile(form.IniDir.Text);
+                form.AppendFile(fileLines, form.IniDir.Text);
+            }
+            catch (UnauthorizedAccessException)
+            {
+                MessageBox.Show("Please ensure that the ini files are not readonly", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
+        }
+
+        // Function that executes when the user clicks on the FixMosue checkbox
+        public void SetFixMouse()
+        {
+            try
+            {
+                string[] fileLines = form.GetFileLines(form.IniDir.Text);
+                string value1 = "0.8000";
+                string value2 = "0.5625";
+
+                // Check to see if the checkbox was checked or unchecked
+                if (form.FixMouseBox.Checked)
+                {
+                    value1 = "1.0000";
+                    value2 = "1.0000";
+                }
+
+                // Change the lines
+                fileLines[form.IsFound(fileLines, "fIronSightsPitchSpeedRatio=")] = "fIronSightsPitchSpeedRatio=" + value1;
+                fileLines[form.IsFound(fileLines, "fPitchSpeedRatio=")] = "fPitchSpeedRatio=" + value2;
 
                 form.ClearFile(form.IniDir.Text);
                 form.AppendFile(fileLines, form.IniDir.Text);
