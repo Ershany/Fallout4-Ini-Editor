@@ -77,10 +77,10 @@ namespace Fallout4Ini
             if (!TabControl.Enabled)
             {
                 MessageBox.Show("IMPORTANT NOTICE\n" +
-                            "If this is your first time using the software please ensure you have not moved the ini lines around to different headers, like moving a line from [Display] to [Imagespace]\n" +
-                            "If you did please delete your ini files and launch Fallout4 so they are rebuilt\n" +
-                            "Also make sure to use your ini files in Documents\\My Games\\Fallout4, not the ini files from SteamApps\\Common\\Fallout4\n" +
-                            "Please do not delete the file in Documents called \"Fallout4IniEditor\"");
+                            "If this is your first time using the software please ensure you have not moved the ini lines around.\n" +
+                            "If you did, please delete your ini files in Documents\\My Games\\Fallout 4 and relaunch Fallout 4, or select your ini files and then click the reset buttons.\n" +
+                            "Also make sure to use your ini files in Documents\\My Games\\Fallout4, NOT the ini files from SteamApps\\Common\\Fallout4\n" +
+                            "Please do not delete the file in Documents called \"Fallout4IniEditor\".");
             }
         }
 
@@ -437,11 +437,12 @@ namespace Fallout4Ini
         // Method that executes if the user clicks the about button
         private void aboutButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Fallout 4 ini editor made by Brady Jessup\n" + 
-                            "This program allows you to edit Fallout 4 settings with no knowledge of messing with the ini files\n" +
-                            "This program uses a metadata file located in your documents so please do not delete it\n" + 
-                            "All updates will be free regardless of donations\n" +
-                            "Developed using C# and Visual Studio\n" + 
+            MessageBox.Show("Fallout 4 ini editor made by Brady Jessup.\n" + 
+                            "This program allows you to edit Fallout 4 settings with no knowledge of messing with the ini files.\n" +
+                            "This program uses a metadata file located in your documents so please do not delete it.\n" + 
+                            "All updates will be free regardless of donations.\n" +
+                            "NexusMods.com will be updated with the new versions.\n" +
+                            "Developed using C# and Visual Studio.\n" + 
                             "Please report any bugs to this email: Bradyjessup@hotmail.com", "About the Fallout4 Ini Editor");
         }
 
@@ -484,6 +485,8 @@ namespace Fallout4Ini
         // Method that executes when the user clicks the reset fallout4ini button
         private void resetIniButton_Click(object sender, EventArgs e)
         {
+            if (IniDir.Text == "")
+                return;
             string file = Properties.Resources.Fallout4;
             ClearFile(IniDir.Text);
             File.AppendAllText(IniDir.Text, file);
@@ -494,6 +497,8 @@ namespace Fallout4Ini
         // Method that executes when the user clicks the reset fallout4prefsini button
         private void resetPrefsIniButton_Click(object sender, EventArgs e)
         {
+            if (PrefsIniDir.Text == "")
+                return;
             string file = Properties.Resources.Fallout4Prefs;
             ClearFile(PrefsIniDir.Text);
             File.AppendAllText(PrefsIniDir.Text, file);

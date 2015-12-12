@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Fallout4Ini.exe" size="434104">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Fallout4Ini.exe" size="432056">
       <assemblyIdentity name="Fallout4Ini" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>QwaXgVAW2CAcq7DlXUp939DdmThPobh/BK7sQ736kEY=</dsig:DigestValue>
+        <dsig:DigestValue>VChpGEumJDUJ6Cl5d9N+GqjL9bU5dYqPxpYXtkQd8Mo=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
