@@ -72,6 +72,9 @@
             this.aboutButton = new System.Windows.Forms.Button();
             this.resetIniButton = new System.Windows.Forms.Button();
             this.resetPrefsIniButton = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
+            this.highResBox = new System.Windows.Forms.CheckBox();
+            this.highResLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.banner)).BeginInit();
             this.tabControl.SuspendLayout();
@@ -154,6 +157,9 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.highResLabel);
+            this.tabPage1.Controls.Add(this.highResBox);
+            this.tabPage1.Controls.Add(this.label9);
             this.tabPage1.Controls.Add(this.removeStutterLabel);
             this.tabPage1.Controls.Add(this.removeStutterBox);
             this.tabPage1.Controls.Add(this.label8);
@@ -188,9 +194,9 @@
             this.removeStutterLabel.AutoSize = true;
             this.removeStutterLabel.Location = new System.Drawing.Point(340, 160);
             this.removeStutterLabel.Name = "removeStutterLabel";
-            this.removeStutterLabel.Size = new System.Drawing.Size(311, 13);
+            this.removeStutterLabel.Size = new System.Drawing.Size(317, 13);
             this.removeStutterLabel.TabIndex = 20;
-            this.removeStutterLabel.Text = "Removes the stuttering (can cause issues, turn off if not needed)";
+            this.removeStutterLabel.Text = "Removes the stuttering ( can cause issues, turn off if not needed )";
             // 
             // removeStutterBox
             // 
@@ -216,9 +222,9 @@
             this.increaseFPSLabel.AutoSize = true;
             this.increaseFPSLabel.Location = new System.Drawing.Point(340, 134);
             this.increaseFPSLabel.Name = "increaseFPSLabel";
-            this.increaseFPSLabel.Size = new System.Drawing.Size(363, 13);
+            this.increaseFPSLabel.Size = new System.Drawing.Size(369, 13);
             this.increaseFPSLabel.TabIndex = 17;
-            this.increaseFPSLabel.Text = "Check to increase FPS on your rig (can cause issues, turn off if not needed)";
+            this.increaseFPSLabel.Text = "Check to increase FPS on your rig ( can cause issues, turn off if not needed )";
             // 
             // increaseFPSBox
             // 
@@ -544,6 +550,34 @@
             this.resetPrefsIniButton.UseVisualStyleBackColor = true;
             this.resetPrefsIniButton.Click += new System.EventHandler(this.resetPrefsIniButton_Click);
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(18, 183);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(125, 13);
+            this.label9.TabIndex = 21;
+            this.label9.Text = "Force High-Res Textures";
+            // 
+            // highResBox
+            // 
+            this.highResBox.AutoSize = true;
+            this.highResBox.Location = new System.Drawing.Point(179, 184);
+            this.highResBox.Name = "highResBox";
+            this.highResBox.Size = new System.Drawing.Size(15, 14);
+            this.highResBox.TabIndex = 22;
+            this.highResBox.UseVisualStyleBackColor = true;
+            this.highResBox.CheckedChanged += new System.EventHandler(this.highResBox_CheckedChanged);
+            // 
+            // highResLabel
+            // 
+            this.highResLabel.AutoSize = true;
+            this.highResLabel.Location = new System.Drawing.Point(340, 185);
+            this.highResLabel.Name = "highResLabel";
+            this.highResLabel.Size = new System.Drawing.Size(362, 13);
+            this.highResLabel.TabIndex = 23;
+            this.highResLabel.Text = "Fixes the issue of low res textures being loaded ( slows down loading times )";
+            // 
             // EditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -624,6 +658,9 @@
         private System.Windows.Forms.CheckBox removeStutterBox;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label removeStutterLabel;
+        private System.Windows.Forms.Label highResLabel;
+        private System.Windows.Forms.CheckBox highResBox;
+        private System.Windows.Forms.Label label9;
 
         // Accessors
         public System.Windows.Forms.TextBox PrefsIniDir
@@ -680,6 +717,11 @@
         {
             get { return removeStutterBox; }
             set { removeStutterBox = value; }
+        }
+        public System.Windows.Forms.CheckBox HighResBox
+        {
+            get { return highResBox; }
+            set { highResBox = value; }
         }
 
     }

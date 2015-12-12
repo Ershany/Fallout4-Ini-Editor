@@ -34,6 +34,7 @@ namespace Fallout4Ini
                 CheckPauseAltTab(fallout4Lines);
                 CheckIncreaseFPS(fallout4Lines);
                 CheckRemoveStutter(fallout4Lines);
+                CheckHighRes(fallout4Lines);
             }
 
             // Check on the Fallout4Prefs.ini file
@@ -149,7 +150,7 @@ namespace Fallout4Ini
             }
         }
 
-        //Function called by Update, which will set RemoveStutter checkbox accordingly
+        // Function called by Update, which will set RemoveStutter checkbox accordingly
         private void CheckRemoveStutter(string[] iniLines)
         {
             if (form.IsFound(iniLines, "iPreloadSizeLimit=262144000") != -1)
@@ -159,6 +160,21 @@ namespace Fallout4Ini
             else
             {
                 form.RemoveStutterBox.Checked = false;
+            }
+        }
+
+        // Function called by Update, which will set HighRes checkbox accordingly
+        private void CheckHighRes(string[] iniLines)
+        {
+            if (form.IsFound(iniLines, "bForceUpdateDiffuseOnly=0") != -1 && form.IsFound(iniLines, "iTextureDegradeDistance0=1600") != -1 &&
+                form.IsFound(iniLines, "iTextureDegradeDistance1=3000") != -1 && form.IsFound(iniLines, "iTextureUpgradeDistance0=1200") != -1 &&
+                form.IsFound(iniLines, "iTextureUpgradeDistance1=2400") != -1)
+            {
+                form.HighResBox.Checked = true;
+            }
+            else
+            {
+                form.HighResBox.Checked = false;
             }
         }
         
@@ -398,12 +414,14 @@ namespace Fallout4Ini
                 // Check to see if the checkbox was checked or unchecked and make sure that the settings aren't already there
                 if (form.IncreaseFPSBox.Checked)
                 {
-                    // Needs to get written under the general header, so find the index of the header
-                    int index = form.IsFound(fileLines, "[General]");
-
                     // Ensure that the lines are not there to duplicate them
                     if (form.IsFound(fileLines, "uInterior Cell Buffer=12") == -1 && form.IsFound(fileLines, "uExterior Cell Buffer=144") == -1 && form.IsFound(fileLines, "iNumHWThreads=8") == -1)
-                        fileLines = form.GetNewArray(fileLines, new string[] {"uInterior Cell Buffer=12", "uExterior Cell Buffer=144", "iNumHWThreads=8"}, index + 1);
+                    {
+                        // Needs to get written under the general header, so find the index of the header
+                        int index = form.IsFound(fileLines, "[General]");
+
+                        fileLines = form.GetNewArray(fileLines, new string[] { "uInterior Cell Buffer=12", "uExterior Cell Buffer=144", "iNumHWThreads=8" }, index + 1);
+                    }
                 }
                 else
                 {
@@ -430,16 +448,55 @@ namespace Fallout4Ini
                 // Check to see if the checkbox was checked or unchecked
                 if (form.RemoveStutterBox.Checked)
                 {
-                    // Needs to get written under the general header, so find the index of the header
-                    int index = form.IsFound(fileLines, "[General]");
-
                     // Ensure that the lines are not there to duplicate them
                     if (form.IsFound(fileLines, "iPreloadSizeLimit=262144000") == -1)
+                    {
+                        // Needs to get written under the general header, so find the index of the header
+                        int index = form.IsFound(fileLines, "[General]");
+
                         fileLines = form.GetNewArray(fileLines, new string[] {"iPreloadSizeLimit=262144000"}, index + 1);
+                    }
+                        
                 }
                 else
                 {
                     fileLines = form.DeleteElementsInArray(fileLines, new string[] {"iPreloadSizeLimit=262144000"});
+                }
+
+                form.ClearFile(form.IniDir.Text);
+                form.AppendFile(fileLines, form.IniDir.Text);
+            }
+            catch (UnauthorizedAccessException)
+            {
+                MessageBox.Show("Please ensure that the ini files are not readonly", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
+        }
+
+        // Function that executes when the user clicks on the highRes checkbox
+        public void SetHighRes()
+        {
+            try
+            {
+                string[] fileLines = form.GetFileLines(form.IniDir.Text);
+
+                // Check to see if the checkbox was checked or unchecked
+                if (form.HighResBox.Checked)
+                {
+                    // Ensure that the lines are not there to duplicate them
+                    if (form.IsFound(fileLines, "bForceUpdateDiffuseOnly=0") == -1 && form.IsFound(fileLines, "iTextureDegradeDistance0=1600") == -1 &&
+                        form.IsFound(fileLines, "iTextureDegradeDistance1=3000") == -1 && form.IsFound(fileLines, "iTextureUpgradeDistance0=1200") == -1 &&
+                        form.IsFound(fileLines, "iTextureUpgradeDistance1=2400") == -1)
+                    {
+                        // Needs to get written under the general header, so find the index of the header
+                        int index = form.IsFound(fileLines, "[General]");
+
+                        fileLines = form.GetNewArray(fileLines, new string[] {"bForceUpdateDiffuseOnly=0", "iTextureDegradeDistance0=1600", "iTextureDegradeDistance1=3000", "iTextureUpgradeDistance0=1200", "iTextureUpgradeDistance1=2400"}, index + 1);
+                    }
+                }
+                else
+                {
+                    fileLines = form.DeleteElementsInArray(fileLines, new string[] {"bForceUpdateDiffuseOnly=0", "iTextureDegradeDistance0=1600", "iTextureDegradeDistance1=3000", "iTextureUpgradeDistance0=1200", "iTextureUpgradeDistance1=2400"});
                 }
 
                 form.ClearFile(form.IniDir.Text);

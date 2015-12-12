@@ -495,5 +495,10 @@ namespace Fallout4Ini
         {
             manager.SetRemoveStutter();
         }
+
+        private void highResBox_CheckedChanged(object sender, EventArgs e)
+        {
+            manager.SetHighRes();
+        }
     }
 }
