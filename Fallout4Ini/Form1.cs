@@ -484,5 +484,16 @@ namespace Fallout4Ini
             InitIni();
             MessageBox.Show("Fallout4Prefs.ini has been reset, make sure to change your settings again when you open the game!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
+
+        // Method that executes when the user clicks the increaseFPSBox
+        private void increaseFPSBox_CheckedChanged(object sender, EventArgs e)
+        {
+            manager.SetIncreaseFPS();
+        }
+
+        private void removeStutterBox_CheckedChanged(object sender, EventArgs e)
+        {
+            manager.SetRemoveStutter();
+        }
     }
 }

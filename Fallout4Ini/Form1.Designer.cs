@@ -38,6 +38,12 @@
             this.donationButton = new System.Windows.Forms.Button();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.removeStutterLabel = new System.Windows.Forms.Label();
+            this.removeStutterBox = new System.Windows.Forms.CheckBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.increaseFPSLabel = new System.Windows.Forms.Label();
+            this.increaseFPSBox = new System.Windows.Forms.CheckBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.thirdFOVNum = new System.Windows.Forms.NumericUpDown();
             this.firstFOVNum = new System.Windows.Forms.NumericUpDown();
             this.thirdFOVLabel = new System.Windows.Forms.Label();
@@ -148,6 +154,12 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.removeStutterLabel);
+            this.tabPage1.Controls.Add(this.removeStutterBox);
+            this.tabPage1.Controls.Add(this.label8);
+            this.tabPage1.Controls.Add(this.increaseFPSLabel);
+            this.tabPage1.Controls.Add(this.increaseFPSBox);
+            this.tabPage1.Controls.Add(this.label7);
             this.tabPage1.Controls.Add(this.thirdFOVNum);
             this.tabPage1.Controls.Add(this.firstFOVNum);
             this.tabPage1.Controls.Add(this.thirdFOVLabel);
@@ -170,6 +182,62 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "General";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // removeStutterLabel
+            // 
+            this.removeStutterLabel.AutoSize = true;
+            this.removeStutterLabel.Location = new System.Drawing.Point(340, 160);
+            this.removeStutterLabel.Name = "removeStutterLabel";
+            this.removeStutterLabel.Size = new System.Drawing.Size(311, 13);
+            this.removeStutterLabel.TabIndex = 20;
+            this.removeStutterLabel.Text = "Removes the stuttering (can cause issues, turn off if not needed)";
+            // 
+            // removeStutterBox
+            // 
+            this.removeStutterBox.AutoSize = true;
+            this.removeStutterBox.Location = new System.Drawing.Point(179, 159);
+            this.removeStutterBox.Name = "removeStutterBox";
+            this.removeStutterBox.Size = new System.Drawing.Size(15, 14);
+            this.removeStutterBox.TabIndex = 19;
+            this.removeStutterBox.UseVisualStyleBackColor = true;
+            this.removeStutterBox.CheckedChanged += new System.EventHandler(this.removeStutterBox_CheckedChanged);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(18, 158);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(81, 13);
+            this.label8.TabIndex = 18;
+            this.label8.Text = "Remove Stutter";
+            // 
+            // increaseFPSLabel
+            // 
+            this.increaseFPSLabel.AutoSize = true;
+            this.increaseFPSLabel.Location = new System.Drawing.Point(340, 134);
+            this.increaseFPSLabel.Name = "increaseFPSLabel";
+            this.increaseFPSLabel.Size = new System.Drawing.Size(363, 13);
+            this.increaseFPSLabel.TabIndex = 17;
+            this.increaseFPSLabel.Text = "Check to increase FPS on your rig (can cause issues, turn off if not needed)";
+            // 
+            // increaseFPSBox
+            // 
+            this.increaseFPSBox.AutoSize = true;
+            this.increaseFPSBox.Location = new System.Drawing.Point(179, 134);
+            this.increaseFPSBox.Name = "increaseFPSBox";
+            this.increaseFPSBox.Size = new System.Drawing.Size(15, 14);
+            this.increaseFPSBox.TabIndex = 16;
+            this.increaseFPSBox.UseVisualStyleBackColor = true;
+            this.increaseFPSBox.CheckedChanged += new System.EventHandler(this.increaseFPSBox_CheckedChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(18, 133);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(71, 13);
+            this.label7.TabIndex = 15;
+            this.label7.Text = "Increase FPS";
             // 
             // thirdFOVNum
             // 
@@ -550,6 +618,12 @@
         private System.Windows.Forms.Label pauseAltTabLabel;
         private System.Windows.Forms.Button resetPrefsIniButton;
         private System.Windows.Forms.Button resetIniButton;
+        private System.Windows.Forms.Label increaseFPSLabel;
+        private System.Windows.Forms.CheckBox increaseFPSBox;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.CheckBox removeStutterBox;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label removeStutterLabel;
 
         // Accessors
         public System.Windows.Forms.TextBox PrefsIniDir
@@ -596,6 +670,16 @@
         {
             get { return pauseAltTabBox; }
             set { pauseAltTabBox = value; }
+        }
+        public System.Windows.Forms.CheckBox IncreaseFPSBox
+        {
+            get { return increaseFPSBox; }
+            set { increaseFPSBox = value; }
+        }
+        public System.Windows.Forms.CheckBox RemoveStutterBox
+        {
+            get { return removeStutterBox; }
+            set { removeStutterBox = value; }
         }
 
     }

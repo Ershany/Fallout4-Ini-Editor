@@ -31,7 +31,9 @@ namespace Fallout4Ini
 
                 // Now do stuff with these lines
                 CheckSkipVideo(fallout4Lines);
-                checkPausAltTab(fallout4Lines);
+                CheckPauseAltTab(fallout4Lines);
+                CheckIncreaseFPS(fallout4Lines);
+                CheckRemoveStutter(fallout4Lines);
             }
 
             // Check on the Fallout4Prefs.ini file
@@ -121,8 +123,8 @@ namespace Fallout4Ini
             }
         }
 
-        //Function called by Update, which will set the PauseAltTab checkbox accordingly
-        private void checkPausAltTab(string[] iniLines)
+        // Function called by Update, which will set the PauseAltTab checkbox accordingly
+        private void CheckPauseAltTab(string[] iniLines)
         {
             if (form.IsFound(iniLines, "bAlwaysActive=1") != -1)
             {
@@ -131,6 +133,32 @@ namespace Fallout4Ini
             else if (form.IsFound(iniLines, "bAlwaysActive=0") != -1)
             {
                 form.PauseAltTabBox.Checked = true;
+            }
+        }
+
+        // Function called by Update, which will set the IncreaseFPS checkbox accordingly
+        private void CheckIncreaseFPS(string[] iniLines)
+        {
+            if (form.IsFound(iniLines, "uInterior Cell Buffer=12") != -1 && form.IsFound(iniLines, "uExterior Cell Buffer=144") != -1 && form.IsFound(iniLines, "iNumHWThreads=8") != -1)
+            {
+                form.IncreaseFPSBox.Checked = true;
+            }
+            else
+            {
+                form.IncreaseFPSBox.Checked = false;
+            }
+        }
+
+        //Function called by Update, which will set RemoveStutter checkbox accordingly
+        private void CheckRemoveStutter(string[] iniLines)
+        {
+            if (form.IsFound(iniLines, "iPreloadSizeLimit=262144000") != -1)
+            {
+                form.RemoveStutterBox.Checked = true;
+            }
+            else
+            {
+                form.RemoveStutterBox.Checked = false;
             }
         }
         
@@ -350,6 +378,70 @@ namespace Fallout4Ini
 
                 // Now get the index of the line and manipulate it
                 fileLines[form.IsFound(fileLines, "bAlwaysActive=")] = "bAlwaysActive=" + value;
+                form.ClearFile(form.IniDir.Text);
+                form.AppendFile(fileLines, form.IniDir.Text);
+            }
+            catch (UnauthorizedAccessException)
+            {
+                MessageBox.Show("Please ensure that the ini files are not readonly", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
+        }
+
+        // Function that executes when the user clicks on the increaseFPS checkbox
+        public void SetIncreaseFPS()
+        {
+            try
+            {
+                string[] fileLines = form.GetFileLines(form.IniDir.Text);
+                
+                // Check to see if the checkbox was checked or unchecked and make sure that the settings aren't already there
+                if (form.IncreaseFPSBox.Checked)
+                {
+                    // Needs to get written under the general header, so find the index of the header
+                    int index = form.IsFound(fileLines, "[General]");
+
+                    // Ensure that the lines are not there to duplicate them
+                    if (form.IsFound(fileLines, "uInterior Cell Buffer=12") == -1 && form.IsFound(fileLines, "uExterior Cell Buffer=144") == -1 && form.IsFound(fileLines, "iNumHWThreads=8") == -1)
+                        fileLines = form.GetNewArray(fileLines, new string[] {"uInterior Cell Buffer=12", "uExterior Cell Buffer=144", "iNumHWThreads=8"}, index + 1);
+                }
+                else
+                {
+                    fileLines = form.DeleteElementsInArray(fileLines, new string[] {"uInterior Cell Buffer=12", "uExterior Cell Buffer=144", "iNumHWThreads=8"});
+                }
+
+                form.ClearFile(form.IniDir.Text);
+                form.AppendFile(fileLines, form.IniDir.Text);
+            }
+            catch (UnauthorizedAccessException)
+            {
+                MessageBox.Show("Please ensure that the ini files are not readonly", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
+        }
+
+        // Function that executes when the user clicks on the removeStutter checkbox
+        public void SetRemoveStutter()
+        {
+            try
+            {
+                string[] fileLines = form.GetFileLines(form.IniDir.Text);
+
+                // Check to see if the checkbox was checked or unchecked
+                if (form.RemoveStutterBox.Checked)
+                {
+                    // Needs to get written under the general header, so find the index of the header
+                    int index = form.IsFound(fileLines, "[General]");
+
+                    // Ensure that the lines are not there to duplicate them
+                    if (form.IsFound(fileLines, "iPreloadSizeLimit=262144000") == -1)
+                        fileLines = form.GetNewArray(fileLines, new string[] {"iPreloadSizeLimit=262144000"}, index + 1);
+                }
+                else
+                {
+                    fileLines = form.DeleteElementsInArray(fileLines, new string[] {"iPreloadSizeLimit=262144000"});
+                }
+
                 form.ClearFile(form.IniDir.Text);
                 form.AppendFile(fileLines, form.IniDir.Text);
             }
